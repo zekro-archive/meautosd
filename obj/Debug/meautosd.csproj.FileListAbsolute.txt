@@ -1,7 +1,6 @@
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\bin\Debug\meautosd.exe.config
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\bin\Debug\meautosd.exe
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\bin\Debug\meautosd.pdb
-c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.csprojResolveAssemblyReference.cache
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.fMain.resources
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.Properties.Resources.resources
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.csproj.GenerateResource.Cache

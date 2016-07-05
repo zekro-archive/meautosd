@@ -38,6 +38,7 @@ namespace meautosd
             ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Settings", new EventHandler(openSetings));
             cm.MenuItems.Add("Info", new EventHandler(openInfo));
+            cm.MenuItems.Add("Close", new EventHandler(app_close));
             this.ContextMenu = cm;
 
             if (Settings.Default.afterEncoding == 0)
@@ -53,6 +54,13 @@ namespace meautosd
             cbWriteLog.Checked = Settings.Default.writeLog;
 
             timer.Start();
+
+            cUpdate.update();
+        }
+
+        private void app_close(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void openInfo(object sender, EventArgs e)

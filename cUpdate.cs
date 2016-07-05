@@ -34,30 +34,13 @@ namespace meautosd
         {
             if (getUpdateStatus(VERSION, getOnelineFile(versionFileURL)))
             {
-                var msgbox = MessageBox.Show("A update is available! \n\nClient version: " + VERSION + "\nLatest version: " + getOnelineFile(versionFileURL) + "\n\nDo you want to downlaod the lates version now?",
+                var msgbox = MessageBox.Show("An update is available! \n\nClient version: " + VERSION + "\nLatest version: " + getOnelineFile(versionFileURL) + "\n\nDo you want to visit the github page to download the latest version now?",
                                              "Update available",
                                              MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
                 if (msgbox == DialogResult.Yes)
                 {
-
-                    WebClient client = new WebClient();
-                    client.DownloadFile(getOnelineFile(downloadFileURL), "mouseCounterUpdate.exe");
-
-                    StreamWriter w = new StreamWriter("updatescript.bat");
-                    w.WriteLine("@echo off");
-                    w.WriteLine("if exist mouseCounter.exe (");
-                    w.WriteLine("	del mouseCounter.exe");
-                    w.WriteLine("	ren mouseCounterUpdate.exe mouseCounter.exe");
-                    w.WriteLine("   start mouseCounter.exe");
-                    w.WriteLine(") else (");
-                    w.WriteLine("	echo You have probably renamed the file mouseCounter.exe so the update script can not find the file. Pelase rename it to the ortiginal name to continue!");
-                    w.WriteLine("	pause )");
-                    w.WriteLine("del updatescript.bat");
-                    w.Close();
-
-                    Process.Start("updatescript.bat");
-                    Application.Exit();
+                    Process.Start("https://github.com/zekroTJA/meautosd/releases");
                 }
             }
         }
