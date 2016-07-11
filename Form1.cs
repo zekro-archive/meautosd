@@ -99,6 +99,7 @@ namespace meautosd
                 lbStatus.ForeColor = Color.Red;
             }
 
+
             if (File.Exists(Settings.Default.finishLocation + "//" + Settings.Default.finishName) && status == 1)
             {
                 status = 2;
@@ -116,6 +117,11 @@ namespace meautosd
                     taskType = "Der PC wird heruntergefahren in: ";
                     finished = true;
                     time = Settings.Default.delayTime * 60;
+
+                    if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                    {
+                        cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will shut down now.");
+                    }
 
                     if (Settings.Default.writeLog)
                     {
@@ -136,6 +142,7 @@ namespace meautosd
                     finished = true;
                     time = Settings.Default.delayTime * 60;
                     MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
 
                 //HYBERNATE
@@ -211,6 +218,11 @@ namespace meautosd
                     writer.Close();
                 }
 
+                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                {
+                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to standby now.");
+                }
+
                 Application.Exit();
             }
                 
@@ -224,6 +236,11 @@ namespace meautosd
                     writer.WriteLine("SYSTEM HIBERNATE:");
                     writer.WriteLine(DateTime.Now);
                     writer.Close();
+                }
+
+                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                {
+                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to hibernate now.");
                 }
 
                 Application.Exit();

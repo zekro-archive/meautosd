@@ -82,5 +82,29 @@ namespace meautosd.Properties {
                 this["delayTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pbToken {
+            get {
+                return ((string)(this["pbToken"]));
+            }
+            set {
+                this["pbToken"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool pbSend {
+            get {
+                return ((bool)(this["pbSend"]));
+            }
+            set {
+                this["pbSend"] = value;
+            }
+        }
     }
 }
