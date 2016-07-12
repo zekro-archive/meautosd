@@ -43,6 +43,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tbPbToken = new System.Windows.Forms.TextBox();
             this.cbPbSend = new System.Windows.Forms.CheckBox();
+            this.cbDelete = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +81,7 @@
             // 
             this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOK.Location = new System.Drawing.Point(229, 318);
+            this.btOK.Location = new System.Drawing.Point(229, 333);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(82, 22);
             this.btOK.TabIndex = 3;
@@ -92,7 +93,7 @@
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCancel.Location = new System.Drawing.Point(317, 318);
+            this.btCancel.Location = new System.Drawing.Point(317, 333);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(82, 22);
             this.btCancel.TabIndex = 4;
@@ -143,6 +144,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbDelete);
             this.groupBox1.Controls.Add(this.tbLocFile);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
@@ -153,7 +155,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(10, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(390, 167);
+            this.groupBox1.Size = new System.Drawing.Size(390, 193);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Miscellaneous Settings";
@@ -165,7 +167,7 @@
             this.groupBox2.Controls.Add(this.linkLabel2);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(10, 195);
+            this.groupBox2.Location = new System.Drawing.Point(10, 211);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(390, 111);
             this.groupBox2.TabIndex = 10;
@@ -213,12 +215,22 @@
             this.cbPbSend.Text = "Send push notifications via Pushbullet after encoding ";
             this.cbPbSend.UseVisualStyleBackColor = true;
             // 
+            // cbDelete
+            // 
+            this.cbDelete.AutoSize = true;
+            this.cbDelete.Location = new System.Drawing.Point(10, 165);
+            this.cbDelete.Name = "cbDelete";
+            this.cbDelete.Size = new System.Drawing.Size(171, 17);
+            this.cbDelete.TabIndex = 11;
+            this.cbDelete.Text = "Delete finish file after encoding";
+            this.cbDelete.UseVisualStyleBackColor = true;
+            // 
             // fSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(412, 353);
+            this.ClientSize = new System.Drawing.Size(412, 368);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btCancel);
@@ -254,5 +266,6 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbPbSend;
+        private System.Windows.Forms.CheckBox cbDelete;
     }
 }

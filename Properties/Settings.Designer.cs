@@ -106,5 +106,29 @@ namespace meautosd.Properties {
                 this["pbSend"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool closeAfterEncoding {
+            get {
+                return ((bool)(this["closeAfterEncoding"]));
+            }
+            set {
+                this["closeAfterEncoding"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deleFinishFile {
+            get {
+                return ((bool)(this["deleFinishFile"]));
+            }
+            set {
+                this["deleFinishFile"] = value;
+            }
+        }
     }
 }

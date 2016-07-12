@@ -47,15 +47,22 @@ namespace meautosd
                 rbStandby.Checked = true;
             else if (Settings.Default.afterEncoding == 2)
                 rbHibernate.Checked = true;
-            else if (Settings.Default.afterEncoding == 3)
-                rbClose.Checked = true;
+
+            cbClose.Checked = Settings.Default.closeAfterEncoding;
 
             nudDelay.Value = Settings.Default.delayTime;
             cbWriteLog.Checked = Settings.Default.writeLog;
 
             timer.Start();
 
-            cUpdate.update();
+            try
+            {
+                cUpdate.update();
+            }  
+            catch(Exception exception)
+            {
+                MessageBox.Show("A problem occured while checking for updates.\n\nIf your PC is in offline mode, pelase go online to check for updates.\n\nHere you can see the cause of the error: \n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void app_close(object sender, EventArgs e)
@@ -145,7 +152,7 @@ namespace meautosd
 
                 }
 
-                //HYBERNATE
+                //HIBERNATE
                 else if (Settings.Default.afterEncoding == 2 && !finished)
                 {
                     btCancelTask.Enabled = true;
@@ -156,6 +163,79 @@ namespace meautosd
                     time = Settings.Default.delayTime * 60;
                     MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+
+        
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            time = time-1;
+            lbTask.Text = taskType + time + " Sek.";
+
+            //STANDBY
+            if (Settings.Default.afterEncoding == 1 && time == 0)
+            {
+                Application.SetSuspendState(PowerState.Suspend, true, true);
+
+                if (Settings.Default.writeLog)
+                {
+                    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
+                    writer.WriteLine("SYSTEM STANDBY:");
+                    writer.WriteLine(DateTime.Now);
+                    writer.Close();
+                }
+
+                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                {
+                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to standby now.");
+                }
+
+                if (Settings.Default.closeAfterEncoding)
+                    Application.Exit();
+            }
+
+            //HIBERNATE    
+            else if (Settings.Default.afterEncoding == 2 && time == 0)
+            {
+                Process.Start(Environment.GetEnvironmentVariable("windir") + "//system32//rundll32.exe", "powrprof.dll, SetSuspendState");
+
+                if (Settings.Default.writeLog)
+                {
+                    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
+                    writer.WriteLine("SYSTEM HIBERNATE:");
+                    writer.WriteLine(DateTime.Now);
+                    writer.Close();
+                }
+
+                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                {
+                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to hibernate now.");
+                }
+
+                if (Settings.Default.closeAfterEncoding)
+                    Application.Exit();
+            }
+
+        }
+
+        private void btCancelTask_Click(object sender, EventArgs e)
+        {
+            if (enabled_btCancelTask)
+            {
+                Process.Start("shutdown", "/a");
+                enabled_btCancelTask = false;
+                btCancelTask.Enabled = false;
+                timer1.Stop();
+                lbTask.Text = "";
+            }
+        }
+
+        public void deleteFinishFile()
+        {
+            string filepath = Settings.Default.finishLocation + "//" + Settings.Default.finishName;
+            if (Settings.Default.deleFinishFile && File.Exists(filepath))
+            {
+                File.Delete(filepath);
             }
         }
 
@@ -183,10 +263,9 @@ namespace meautosd
                 Settings.Default.afterEncoding = 2;
         }
 
-        private void rbClose_CheckedChanged(object sender, EventArgs e)
+        private void cbClose_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbClose.Checked == true)
-                Settings.Default.afterEncoding = 3;
+            Settings.Default.closeAfterEncoding = cbClose.Checked;
         }
 
         private void nudDelay_ValueChanged(object sender, EventArgs e)
@@ -199,65 +278,5 @@ namespace meautosd
             Settings.Default.writeLog = cbWriteLog.Checked;
         }
         #endregion
-
-        
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            time = time-1;
-            lbTask.Text = taskType + time + " Sek.";
-
-            if (Settings.Default.afterEncoding == 1 && time == 0)
-            {
-                Application.SetSuspendState(PowerState.Suspend, true, true);
-
-                if (Settings.Default.writeLog)
-                {
-                    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-                    writer.WriteLine("SYSTEM STANDBY:");
-                    writer.WriteLine(DateTime.Now);
-                    writer.Close();
-                }
-
-                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
-                {
-                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to standby now.");
-                }
-
-                Application.Exit();
-            }
-                
-            else if (Settings.Default.afterEncoding == 2 && time == 0)
-            {
-                Process.Start(Environment.GetEnvironmentVariable("windir") + "//system32//rundll32.exe", "powrprof.dll, SetSuspendState");
-
-                if (Settings.Default.writeLog)
-                {
-                    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-                    writer.WriteLine("SYSTEM HIBERNATE:");
-                    writer.WriteLine(DateTime.Now);
-                    writer.Close();
-                }
-
-                if (Settings.Default.pbSend && Settings.Default.pbToken != "")
-                {
-                    cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will set to hibernate now.");
-                }
-
-                Application.Exit();
-            }
-
-        }
-
-        private void btCancelTask_Click(object sender, EventArgs e)
-        {
-            if (enabled_btCancelTask)
-            {
-                Process.Start("shutdown", "/a");
-                enabled_btCancelTask = false;
-                btCancelTask.Enabled = false;
-                timer1.Stop();
-                lbTask.Text = "";
-            }
-        }
     }
 }

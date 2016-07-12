@@ -36,7 +36,6 @@
             this.rbShutdown = new System.Windows.Forms.RadioButton();
             this.rbStandby = new System.Windows.Forms.RadioButton();
             this.rbHibernate = new System.Windows.Forms.RadioButton();
-            this.rbClose = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbWriteLog = new System.Windows.Forms.CheckBox();
             this.nudDelay = new System.Windows.Forms.NumericUpDown();
@@ -44,6 +43,7 @@
             this.btCancelTask = new System.Windows.Forms.Button();
             this.lbTask = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cbClose = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).BeginInit();
             this.SuspendLayout();
@@ -106,25 +106,13 @@
             this.rbHibernate.UseVisualStyleBackColor = true;
             this.rbHibernate.CheckedChanged += new System.EventHandler(this.rbHibernate_CheckedChanged);
             // 
-            // rbClose
-            // 
-            this.rbClose.AutoSize = true;
-            this.rbClose.Location = new System.Drawing.Point(12, 93);
-            this.rbClose.Name = "rbClose";
-            this.rbClose.Size = new System.Drawing.Size(77, 17);
-            this.rbClose.TabIndex = 6;
-            this.rbClose.TabStop = true;
-            this.rbClose.Text = "Close AMC";
-            this.rbClose.UseVisualStyleBackColor = true;
-            this.rbClose.CheckedChanged += new System.EventHandler(this.rbClose_CheckedChanged);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbClose);
             this.groupBox1.Controls.Add(this.cbWriteLog);
             this.groupBox1.Controls.Add(this.nudDelay);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.rbShutdown);
-            this.groupBox1.Controls.Add(this.rbClose);
             this.groupBox1.Controls.Add(this.rbStandby);
             this.groupBox1.Controls.Add(this.rbHibernate);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
@@ -193,6 +181,17 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cbClose
+            // 
+            this.cbClose.AutoSize = true;
+            this.cbClose.Location = new System.Drawing.Point(12, 93);
+            this.cbClose.Name = "cbClose";
+            this.cbClose.Size = new System.Drawing.Size(100, 17);
+            this.cbClose.TabIndex = 10;
+            this.cbClose.Text = "Close after enc.";
+            this.cbClose.UseVisualStyleBackColor = true;
+            this.cbClose.CheckedChanged += new System.EventHandler(this.cbClose_CheckedChanged);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,7 +227,6 @@
         private System.Windows.Forms.RadioButton rbShutdown;
         private System.Windows.Forms.RadioButton rbStandby;
         private System.Windows.Forms.RadioButton rbHibernate;
-        private System.Windows.Forms.RadioButton rbClose;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown nudDelay;
         private System.Windows.Forms.Label label2;
@@ -236,6 +234,7 @@
         private System.Windows.Forms.Button btCancelTask;
         private System.Windows.Forms.Label lbTask;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox cbClose;
     }
 }
 

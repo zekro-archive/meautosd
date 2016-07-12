@@ -25,6 +25,7 @@ namespace meautosd
             tbFileName.Text = Settings.Default.finishName;
             tbPbToken.Text = Settings.Default.pbToken;
             cbPbSend.Checked = Settings.Default.pbSend;
+            cbDelete.Checked = Settings.Default.deleFinishFile;
         }
 
         private void btLocFile_Click(object sender, EventArgs e)
@@ -40,6 +41,7 @@ namespace meautosd
             Settings.Default.finishName = tbFileName.Text;
             Settings.Default.pbToken = tbPbToken.Text;
             Settings.Default.pbSend = cbPbSend.Checked;
+            Settings.Default.deleFinishFile = cbDelete.Checked;
             Settings.Default.Save();
             this.Close();
         }
