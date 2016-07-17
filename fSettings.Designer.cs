@@ -38,12 +38,13 @@
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.tbPbToken = new System.Windows.Forms.TextBox();
-            this.cbPbSend = new System.Windows.Forms.CheckBox();
             this.cbDelete = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbPbSend = new System.Windows.Forms.CheckBox();
+            this.tbPbToken = new System.Windows.Forms.TextBox();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -160,8 +161,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Miscellaneous Settings";
             // 
+            // cbDelete
+            // 
+            this.cbDelete.AutoSize = true;
+            this.cbDelete.Location = new System.Drawing.Point(10, 165);
+            this.cbDelete.Name = "cbDelete";
+            this.cbDelete.Size = new System.Drawing.Size(171, 17);
+            this.cbDelete.TabIndex = 11;
+            this.cbDelete.Text = "Delete finish file after encoding";
+            this.cbDelete.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.linkLabel3);
             this.groupBox2.Controls.Add(this.cbPbSend);
             this.groupBox2.Controls.Add(this.tbPbToken);
             this.groupBox2.Controls.Add(this.linkLabel2);
@@ -174,26 +186,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pushbullet Notifications";
             // 
-            // label4
+            // cbPbSend
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 25);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(161, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Your Pushbullet Account Token:";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.LinkColor = System.Drawing.Color.Cyan;
-            this.linkLabel2.Location = new System.Drawing.Point(190, 25);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(132, 13);
-            this.linkLabel2.TabIndex = 9;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Where do i get this token?";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.cbPbSend.AutoSize = true;
+            this.cbPbSend.Location = new System.Drawing.Point(10, 84);
+            this.cbPbSend.Name = "cbPbSend";
+            this.cbPbSend.Size = new System.Drawing.Size(279, 17);
+            this.cbPbSend.TabIndex = 10;
+            this.cbPbSend.Text = "Send push notifications via Pushbullet after encoding ";
+            this.cbPbSend.UseVisualStyleBackColor = true;
             // 
             // tbPbToken
             // 
@@ -205,25 +206,38 @@
             this.tbPbToken.Size = new System.Drawing.Size(368, 20);
             this.tbPbToken.TabIndex = 9;
             // 
-            // cbPbSend
+            // linkLabel2
             // 
-            this.cbPbSend.AutoSize = true;
-            this.cbPbSend.Location = new System.Drawing.Point(10, 84);
-            this.cbPbSend.Name = "cbPbSend";
-            this.cbPbSend.Size = new System.Drawing.Size(279, 17);
-            this.cbPbSend.TabIndex = 10;
-            this.cbPbSend.Text = "Send push notifications via Pushbullet after encoding ";
-            this.cbPbSend.UseVisualStyleBackColor = true;
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkColor = System.Drawing.Color.Cyan;
+            this.linkLabel2.Location = new System.Drawing.Point(174, 25);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(132, 13);
+            this.linkLabel2.TabIndex = 9;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "Where do i get this token?";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
-            // cbDelete
+            // label4
             // 
-            this.cbDelete.AutoSize = true;
-            this.cbDelete.Location = new System.Drawing.Point(10, 165);
-            this.cbDelete.Name = "cbDelete";
-            this.cbDelete.Size = new System.Drawing.Size(171, 17);
-            this.cbDelete.TabIndex = 11;
-            this.cbDelete.Text = "Delete finish file after encoding";
-            this.cbDelete.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 25);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(161, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Your Pushbullet Account Token:";
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.LinkColor = System.Drawing.Color.Cyan;
+            this.linkLabel3.Location = new System.Drawing.Point(344, 25);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(34, 13);
+            this.linkLabel3.TabIndex = 11;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "[Test]";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // fSettings
             // 
@@ -267,5 +281,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbPbSend;
         private System.Windows.Forms.CheckBox cbDelete;
+        private System.Windows.Forms.LinkLabel linkLabel3;
     }
 }

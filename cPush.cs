@@ -27,9 +27,9 @@ namespace meautosd
                 dataStream.Write(byteArray, 0, byteArray.Length);
                 dataStream.Close();
             }
-            catch
+            catch(Exception exception)
             {
-                MessageBox.Show("There accoured an error whilesending the push notification! Do you have entered a valid token?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There accoured an error whilesending the push notification! Do you have entered a valid token?\n\nHere you can see the exception code:\n\n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

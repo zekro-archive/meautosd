@@ -87,10 +87,10 @@
             this.linkLabel1.LinkColor = System.Drawing.Color.Aqua;
             this.linkLabel1.Location = new System.Drawing.Point(12, 118);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(214, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(149, 13);
             this.linkLabel1.TabIndex = 33;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "WEBSITE (Bitlink to zekro.jimdo.com/#dev)";
+            this.linkLabel1.Text = "Website (zekrodev.jimdo.com)";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // linkLabel2
@@ -99,10 +99,10 @@
             this.linkLabel2.LinkColor = System.Drawing.Color.Aqua;
             this.linkLabel2.Location = new System.Drawing.Point(12, 142);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(260, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(209, 13);
             this.linkLabel2.TabIndex = 34;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "YOUTUBE (Bitlink to youtube.com/zekrommaster110)";
+            this.linkLabel2.Text = "YouTube (youtube.com/zekrommaster110)";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // linkLabel3
@@ -111,10 +111,10 @@
             this.linkLabel3.LinkColor = System.Drawing.Color.Aqua;
             this.linkLabel3.Location = new System.Drawing.Point(12, 169);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(202, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(141, 13);
             this.linkLabel3.TabIndex = 35;
             this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "TWITTER (Bitlink to twitter.com/zekrotja)";
+            this.linkLabel3.Text = "Twitter (twitter.com/zekrotja)";
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // pictureBox1

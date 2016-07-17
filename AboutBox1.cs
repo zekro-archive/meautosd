@@ -107,17 +107,17 @@ namespace meautosd
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://bit.ly/29tdCSg");
+            Process.Start("http://zekrodev.jimdo.com");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://bit.ly/29np68z");
+            Process.Start("http://youtube.com/zekrommaster110");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://bit.ly/29qWxHy");
+            Process.Start("http://twitter.com/zekrotja");
         }
     }
 }

@@ -37,15 +37,25 @@
             this.rbStandby = new System.Windows.Forms.RadioButton();
             this.rbHibernate = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbClose = new System.Windows.Forms.CheckBox();
             this.cbWriteLog = new System.Windows.Forms.CheckBox();
             this.nudDelay = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.btCancelTask = new System.Windows.Forms.Button();
             this.lbTask = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cbClose = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nudHrs = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nudMin = new System.Windows.Forms.NumericUpDown();
+            this.lable15 = new System.Windows.Forms.Label();
+            this.btStartTimer = new System.Windows.Forms.Button();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHrs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -123,6 +133,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Task after encoding";
             // 
+            // cbClose
+            // 
+            this.cbClose.AutoSize = true;
+            this.cbClose.Location = new System.Drawing.Point(12, 93);
+            this.cbClose.Name = "cbClose";
+            this.cbClose.Size = new System.Drawing.Size(100, 17);
+            this.cbClose.TabIndex = 10;
+            this.cbClose.Text = "Close after enc.";
+            this.cbClose.UseVisualStyleBackColor = true;
+            this.cbClose.CheckedChanged += new System.EventHandler(this.cbClose_CheckedChanged);
+            // 
             // cbWriteLog
             // 
             this.cbWriteLog.AutoSize = true;
@@ -159,7 +180,7 @@
             this.btCancelTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btCancelTask.Enabled = false;
             this.btCancelTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCancelTask.Location = new System.Drawing.Point(12, 173);
+            this.btCancelTask.Location = new System.Drawing.Point(12, 268);
             this.btCancelTask.Name = "btCancelTask";
             this.btCancelTask.Size = new System.Drawing.Size(103, 22);
             this.btCancelTask.TabIndex = 10;
@@ -171,7 +192,7 @@
             // 
             this.lbTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbTask.AutoSize = true;
-            this.lbTask.Location = new System.Drawing.Point(126, 178);
+            this.lbTask.Location = new System.Drawing.Point(126, 273);
             this.lbTask.Name = "lbTask";
             this.lbTask.Size = new System.Drawing.Size(0, 13);
             this.lbTask.TabIndex = 11;
@@ -181,23 +202,81 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // cbClose
+            // groupBox2
             // 
-            this.cbClose.AutoSize = true;
-            this.cbClose.Location = new System.Drawing.Point(12, 93);
-            this.cbClose.Name = "cbClose";
-            this.cbClose.Size = new System.Drawing.Size(100, 17);
-            this.cbClose.TabIndex = 10;
-            this.cbClose.Text = "Close after enc.";
-            this.cbClose.UseVisualStyleBackColor = true;
-            this.cbClose.CheckedChanged += new System.EventHandler(this.cbClose_CheckedChanged);
+            this.groupBox2.Controls.Add(this.btStartTimer);
+            this.groupBox2.Controls.Add(this.lable15);
+            this.groupBox2.Controls.Add(this.nudMin);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.nudHrs);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(12, 168);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(319, 90);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Shutdown after specific time";
+            // 
+            // nudHrs
+            // 
+            this.nudHrs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.nudHrs.ForeColor = System.Drawing.Color.White;
+            this.nudHrs.Location = new System.Drawing.Point(12, 20);
+            this.nudHrs.Name = "nudHrs";
+            this.nudHrs.Size = new System.Drawing.Size(64, 20);
+            this.nudHrs.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(80, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "h";
+            // 
+            // nudMin
+            // 
+            this.nudMin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.nudMin.ForeColor = System.Drawing.Color.White;
+            this.nudMin.Location = new System.Drawing.Point(117, 20);
+            this.nudMin.Name = "nudMin";
+            this.nudMin.Size = new System.Drawing.Size(64, 20);
+            this.nudMin.TabIndex = 14;
+            // 
+            // lable15
+            // 
+            this.lable15.AutoSize = true;
+            this.lable15.Location = new System.Drawing.Point(186, 22);
+            this.lable15.Name = "lable15";
+            this.lable15.Size = new System.Drawing.Size(15, 13);
+            this.lable15.TabIndex = 15;
+            this.lable15.Text = "m";
+            // 
+            // btStartTimer
+            // 
+            this.btStartTimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btStartTimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btStartTimer.Location = new System.Drawing.Point(12, 53);
+            this.btStartTimer.Name = "btStartTimer";
+            this.btStartTimer.Size = new System.Drawing.Size(288, 22);
+            this.btStartTimer.TabIndex = 16;
+            this.btStartTimer.Text = "Start timer";
+            this.btStartTimer.UseVisualStyleBackColor = true;
+            this.btStartTimer.Click += new System.EventHandler(this.btStartTimer_Click_1);
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(344, 203);
+            this.ClientSize = new System.Drawing.Size(344, 298);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.lbTask);
             this.Controls.Add(this.btCancelTask);
             this.Controls.Add(this.groupBox1);
@@ -214,6 +293,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHrs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,6 +318,13 @@
         private System.Windows.Forms.Label lbTask;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox cbClose;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown nudMin;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudHrs;
+        private System.Windows.Forms.Button btStartTimer;
+        private System.Windows.Forms.Label lable15;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

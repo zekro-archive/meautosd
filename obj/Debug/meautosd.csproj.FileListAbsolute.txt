@@ -9,3 +9,4 @@ c:\users\ringo hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\
 C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.fSettings.resources
 C:\Users\Ringo Hoffmann\Documents\Visual Studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.fInfo.resources
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.csprojResolveAssemblyReference.cache
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\Debug\meautosd.fFirstStartup.resources

@@ -60,5 +60,10 @@ namespace meautosd
         {
             Process.Start("https://www.pushbullet.com/#settings");
         }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Test message.");
+        }
     }
 }

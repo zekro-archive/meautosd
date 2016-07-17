@@ -130,5 +130,17 @@ namespace meautosd.Properties {
                 this["deleFinishFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool firstStartup {
+            get {
+                return ((bool)(this["firstStartup"]));
+            }
+            set {
+                this["firstStartup"] = value;
+            }
+        }
     }
 }
