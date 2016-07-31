@@ -63,7 +63,7 @@ namespace meautosd
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Test message.");
+            cPush.send(tbPbToken.Text, "AME Auto Shutdown", "Test message.");
         }
     }
 }

@@ -102,7 +102,9 @@ namespace meautosd
 
         private void fInfo_Load(object sender, EventArgs e)
         {
-
+            try { rtbChangelogs.Text = cUpdate.getOnelineFile(cConst.changelogsFileURL); }
+            catch (Exception exc) { MessageBox.Show("Unable to load changelogs. Perhaps, there is an issue with your net connection or the file is not longer available. \n\n Exception:\n\n" + exc, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -118,6 +120,11 @@ namespace meautosd
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("http://twitter.com/zekrotja");
+        }
+
+        private void rtbChangelogs_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

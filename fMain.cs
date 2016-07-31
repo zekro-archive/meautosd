@@ -43,7 +43,7 @@ namespace meautosd
         {
             ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Settings", new EventHandler(openSetings));
-            cm.MenuItems.Add("Info", new EventHandler(openInfo));
+            cm.MenuItems.Add("Info and Changelogs", new EventHandler(openInfo));
             cm.MenuItems.Add("Close", new EventHandler(app_close));
             this.ContextMenu = cm;
 
@@ -113,42 +113,43 @@ namespace meautosd
             }
 
 
-            if (File.Exists(Settings.Default.finishLocation + "//" + Settings.Default.finishName) && status == 1)
+            if (File.Exists(Settings.Default.finishLocation + "//" + Settings.Default.finishName) && status == 1 && !finished)
             {
                 status = 2;
                 lbStatus.Text = "Rendering Finished.";
                 lbStatus.ForeColor = Color.LimeGreen;
 
-
-                //SHUTDOWN
-                if (Settings.Default.afterEncoding == 0 && !finished) 
+                switch (Settings.Default.afterEncoding)
                 {
-                    shutDown();
-                }
+                    //SHUTDOWN
+                    case 0:
+                        deleteFinishFile();
+                        shutDown();
+                        break;
 
-                //STANDBY
-                else if (Settings.Default.afterEncoding == 1 && !finished)
-                {
-                    btCancelTask.Enabled = true;
-                    enabled_btCancelTask = true;
-                    timer1.Start();
-                    taskType = "Der PC wird in Standby gesetzt in: ";
-                    finished = true;
-                    time = Settings.Default.delayTime * 60;
-                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //STANDBY
+                    case 1:
+                        btCancelTask.Enabled = true;
+                        enabled_btCancelTask = true;
+                        timer1.Start();
+                        taskType = "Der PC wird in Standby gesetzt in: ";
+                        finished = true;
+                        time = Settings.Default.delayTime * 60;
+                        MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        deleteFinishFile();
+                        break;
 
-                }
-
-                //HIBERNATE
-                else if (Settings.Default.afterEncoding == 2 && !finished)
-                {
-                    btCancelTask.Enabled = true;
-                    enabled_btCancelTask = true;
-                    timer1.Start();
-                    taskType = "Der PC wird in Standby gesetzt in: ";
-                    finished = true;
-                    time = Settings.Default.delayTime * 60;
-                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //HIBERNATE
+                    case 2:
+                        btCancelTask.Enabled = true;
+                        enabled_btCancelTask = true;
+                        timer1.Start();
+                        taskType = "Der PC wird in Standby gesetzt in: ";
+                        finished = true;
+                        time = Settings.Default.delayTime * 60;
+                        MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        deleteFinishFile();
+                        break;
                 }
             }
         }
@@ -159,18 +160,19 @@ namespace meautosd
             time = time-1;
             lbTask.Text = taskType + time + " Sek.";
 
-            //STANDBY
-            if (Settings.Default.afterEncoding == 1 && time == 0)
-            {
-                standBy();
-            }
+            if (time == 0)
+                switch (Settings.Default.afterEncoding)
+                {
+                    //STANDBY
+                    case 1:
+                        standBy();
+                        break;
 
-            //HIBERNATE    
-            else if (Settings.Default.afterEncoding == 2 && time == 0)
-            {
-                hibernate();
-            }
-
+                    //HIBERNATE
+                    case 2:
+                        hibernate();
+                        break;
+                }
         }
 
         private void btCancelTask_Click(object sender, EventArgs e)

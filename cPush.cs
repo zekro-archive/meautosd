@@ -29,7 +29,7 @@ namespace meautosd
             }
             catch(Exception exception)
             {
-                MessageBox.Show("There accoured an error whilesending the push notification! Do you have entered a valid token?\n\nHere you can see the exception code:\n\n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There occoured an error while sending the push notification. Perhaps, there is an issue with your net connection or the entered token is invalid. \n\nHere you can see the exception code:\n\n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -34,14 +34,8 @@ namespace meautosd
         {
             if (getUpdateStatus(VERSION, getOnelineFile(versionFileURL)))
             {
-                var msgbox = MessageBox.Show("An update is available! \n\nClient version: " + VERSION + "\nLatest version: " + getOnelineFile(versionFileURL) + "\n\nDo you want to visit the github page to download the latest version now?",
-                                             "Update available",
-                                             MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-
-                if (msgbox == DialogResult.Yes)
-                {
-                    Process.Start("https://github.com/zekroTJA/meautosd/releases");
-                }
+                Form fUpdate = new fUpdate();
+                fUpdate.ShowDialog();
             }
         }
     }

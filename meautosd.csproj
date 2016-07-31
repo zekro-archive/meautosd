@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
+    <Compile Include="fInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
+    <Compile Include="fInfo.Designer.cs">
+      <DependentUpon>fInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="cConst.cs" />
     <Compile Include="cPush.cs" />
@@ -64,11 +64,11 @@
     <Compile Include="fFirstStartup.Designer.cs">
       <DependentUpon>fFirstStartup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="fMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="fMain.Designer.cs">
+      <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
     <Compile Include="fSettings.cs">
       <SubType>Form</SubType>
@@ -76,19 +76,28 @@
     <Compile Include="fSettings.Designer.cs">
       <DependentUpon>fSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="fUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fUpdate.Designer.cs">
+      <DependentUpon>fUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox1.resx">
-      <DependentUpon>AboutBox1.cs</DependentUpon>
+    <EmbeddedResource Include="fInfo.resx">
+      <DependentUpon>fInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fFirstStartup.resx">
       <DependentUpon>fFirstStartup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="fMain.resx">
+      <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fSettings.resx">
       <DependentUpon>fSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fUpdate.resx">
+      <DependentUpon>fUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -99,6 +108,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

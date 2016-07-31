@@ -36,6 +36,8 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rtbChangelogs = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.ForeColor = System.Drawing.Color.White;
-            this.okButton.Location = new System.Drawing.Point(240, 204);
+            this.okButton.Location = new System.Drawing.Point(519, 369);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 29;
@@ -83,9 +85,10 @@
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkColor = System.Drawing.Color.Aqua;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 118);
+            this.linkLabel1.Location = new System.Drawing.Point(445, 12);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(149, 13);
             this.linkLabel1.TabIndex = 33;
@@ -95,9 +98,10 @@
             // 
             // linkLabel2
             // 
+            this.linkLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.LinkColor = System.Drawing.Color.Aqua;
-            this.linkLabel2.Location = new System.Drawing.Point(12, 142);
+            this.linkLabel2.Location = new System.Drawing.Point(385, 34);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(209, 13);
             this.linkLabel2.TabIndex = 34;
@@ -107,9 +111,10 @@
             // 
             // linkLabel3
             // 
+            this.linkLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.LinkColor = System.Drawing.Color.Aqua;
-            this.linkLabel3.Location = new System.Drawing.Point(12, 169);
+            this.linkLabel3.Location = new System.Drawing.Point(453, 57);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(141, 13);
             this.linkLabel3.TabIndex = 35;
@@ -127,12 +132,36 @@
             this.pictureBox1.TabIndex = 36;
             this.pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(9, 113);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "Changelogs:";
+            // 
+            // rtbChangelogs
+            // 
+            this.rtbChangelogs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.rtbChangelogs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rtbChangelogs.ForeColor = System.Drawing.Color.White;
+            this.rtbChangelogs.Location = new System.Drawing.Point(12, 138);
+            this.rtbChangelogs.Name = "rtbChangelogs";
+            this.rtbChangelogs.Size = new System.Drawing.Size(582, 217);
+            this.rtbChangelogs.TabIndex = 38;
+            this.rtbChangelogs.Text = "";
+            this.rtbChangelogs.TextChanged += new System.EventHandler(this.rtbChangelogs_TextChanged);
+            // 
             // fInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(327, 239);
+            this.ClientSize = new System.Drawing.Size(606, 404);
+            this.Controls.Add(this.rtbChangelogs);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
@@ -166,5 +195,7 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox rtbChangelogs;
     }
 }
