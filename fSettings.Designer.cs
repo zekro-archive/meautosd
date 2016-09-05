@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.tbLocFile = new System.Windows.Forms.TextBox();
             this.btLocFile = new System.Windows.Forms.Button();
@@ -40,13 +41,19 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbDelete = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.cbPbSend = new System.Windows.Forms.CheckBox();
             this.tbPbToken = new System.Windows.Forms.TextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbAMEStartup = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbAMELoc = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +89,7 @@
             // 
             this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOK.Location = new System.Drawing.Point(229, 333);
+            this.btOK.Location = new System.Drawing.Point(229, 431);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(82, 22);
             this.btOK.TabIndex = 3;
@@ -94,7 +101,7 @@
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCancel.Location = new System.Drawing.Point(317, 333);
+            this.btCancel.Location = new System.Drawing.Point(317, 431);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(82, 22);
             this.btCancel.TabIndex = 4;
@@ -186,6 +193,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pushbullet Notifications";
             // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.LinkColor = System.Drawing.Color.Cyan;
+            this.linkLabel3.Location = new System.Drawing.Point(344, 25);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(34, 13);
+            this.linkLabel3.TabIndex = 11;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "[Test]";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            // 
             // cbPbSend
             // 
             this.cbPbSend.AutoSize = true;
@@ -227,24 +246,60 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Your Pushbullet Account Token:";
             // 
-            // linkLabel3
+            // groupBox3
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.LinkColor = System.Drawing.Color.Cyan;
-            this.linkLabel3.Location = new System.Drawing.Point(344, 25);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(34, 13);
-            this.linkLabel3.TabIndex = 11;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "[Test]";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            this.groupBox3.Controls.Add(this.cbAMEStartup);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.tbAMELoc);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.Location = new System.Drawing.Point(10, 331);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(390, 86);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Open on Startup";
+            // 
+            // cbAMEStartup
+            // 
+            this.cbAMEStartup.AutoSize = true;
+            this.cbAMEStartup.Location = new System.Drawing.Point(276, 27);
+            this.cbAMEStartup.Name = "cbAMEStartup";
+            this.cbAMEStartup.Size = new System.Drawing.Size(102, 17);
+            this.cbAMEStartup.TabIndex = 12;
+            this.cbAMEStartup.Text = "Open on startup";
+            this.cbAMEStartup.UseVisualStyleBackColor = true;
+            this.cbAMEStartup.CheckedChanged += new System.EventHandler(this.cbAMEStartup_CheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(160, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Adobe Media Encoder Location:";
+            // 
+            // tbAMELoc
+            // 
+            this.tbAMELoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.tbAMELoc.Enabled = false;
+            this.tbAMELoc.ForeColor = System.Drawing.Color.White;
+            this.tbAMELoc.Location = new System.Drawing.Point(10, 50);
+            this.tbAMELoc.Name = "tbAMELoc";
+            this.tbAMELoc.Size = new System.Drawing.Size(368, 20);
+            this.tbAMELoc.TabIndex = 2;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // fSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(412, 368);
+            this.ClientSize = new System.Drawing.Size(412, 466);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btCancel);
@@ -259,6 +314,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -282,5 +339,10 @@
         private System.Windows.Forms.CheckBox cbPbSend;
         private System.Windows.Forms.CheckBox cbDelete;
         private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox cbAMEStartup;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbAMELoc;
+        private System.Windows.Forms.Timer timer1;
     }
 }

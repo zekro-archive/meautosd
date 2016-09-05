@@ -1,4 +1,5 @@
 ﻿using meautosd.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,18 +42,21 @@ namespace meautosd
 
         private void fMain_Load(object sender, EventArgs e)
         {
+            if (Settings.Default.dontShowDonate)
+                pbDonate.Visible = false;
+
             ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Settings", new EventHandler(openSetings));
             cm.MenuItems.Add("Info and Changelogs", new EventHandler(openInfo));
             cm.MenuItems.Add("Close", new EventHandler(app_close));
             this.ContextMenu = cm;
 
-            if (Settings.Default.afterEncoding == 0)
-                rbShutdown.Checked = true;
-            else if (Settings.Default.afterEncoding == 1)
-                rbStandby.Checked = true;
-            else if (Settings.Default.afterEncoding == 2)
-                rbHibernate.Checked = true;
+            //if (Settings.Default.afterEncoding == 0)
+            //    rbShutdown.Checked = true;
+            //else if (Settings.Default.afterEncoding == 1)
+            //    rbStandby.Checked = true;
+            //else if (Settings.Default.afterEncoding == 2)
+            //    rbHibernate.Checked = true;
 
             cbClose.Checked = Settings.Default.closeAfterEncoding;
 
@@ -69,6 +73,14 @@ namespace meautosd
             {
                 MessageBox.Show("A problem occured while checking for updates.\n\nIf your PC is in offline mode, pelase go online to check for updates.\n\nHere you can see the cause of the error: \n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            if (!Settings.Default.dontShowSurvey)
+            {
+                fSurvey survey = new fSurvey();
+                survey.ShowDialog();
+            }
+
+            openToolsOnStartup();
         }
 
         private void app_close(object sender, EventArgs e)
@@ -97,19 +109,23 @@ namespace meautosd
                 status = 1;
                 lbStatus.Text = "Waiting for finishing the render lsit.";
                 lbStatus.ForeColor = Color.Cyan;
+                pbStatus.Image = Properties.Resources.status_ready;
             } else if (Settings.Default.finishLocation != "" && Settings.Default.finishName != "")
             {
                 status = 0;
                 lbStatus.Text = "Adobe Media Encoder is not started.";
                 lbStatus.ForeColor = Color.Gray;
+                pbStatus.Image = Properties.Resources.status_notready;
             } else if (Settings.Default.finishLocation == "")
             {
                 lbStatus.Text = "Finish file location is not set!";
                 lbStatus.ForeColor = Color.Red;
+                pbStatus.Image = Properties.Resources.status_error;
             } else if (Settings.Default.finishName == "")
             {
                 lbStatus.Text = "Finish file name is not set!";
                 lbStatus.ForeColor = Color.Red;
+                pbStatus.Image = Properties.Resources.status_error;
             }
 
 
@@ -118,6 +134,8 @@ namespace meautosd
                 status = 2;
                 lbStatus.Text = "Rendering Finished.";
                 lbStatus.ForeColor = Color.LimeGreen;
+                pbStatus.Image = Properties.Resources.status_finish;
+                timer.Stop();
 
                 switch (Settings.Default.afterEncoding)
                 {
@@ -149,6 +167,23 @@ namespace meautosd
                         time = Settings.Default.delayTime * 60;
                         MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         deleteFinishFile();
+                        break;
+
+                    //DO NOTHING
+                    case 3:
+                        btCancelTask.Enabled = true;
+                        enabled_btCancelTask = true;
+                        taskType = "";
+                        finished = true;
+                        time = Settings.Default.delayTime * 60;
+                        deleteFinishFile();
+
+                        MessageBox.Show("Rendering completed.", "Rendering completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                        {
+                            cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Rendering completed.");
+                        }
+
                         break;
                 }
             }
@@ -185,6 +220,7 @@ namespace meautosd
                 timer1.Stop();
                 lbTask.Text = "";
             }
+            timer.Start();
         }
 
         public void shutDown()
@@ -262,6 +298,32 @@ namespace meautosd
             }
         }
 
+
+        private void openToolsOnStartup()
+        {
+            if (Settings.Default.AMEPath == "")
+                Settings.Default.AMEPath = GetProcessPath("Adobe Media Encoder");
+            else if (Settings.Default.openAMEOnStartup)
+                Process.Start(Settings.Default.AMEPath);
+
+            Settings.Default.TVRPath = GetProcessPath("TeamViewer");
+        }
+
+        public string GetProcessPath(string name)
+        {
+            Process[] processes = Process.GetProcessesByName(name);
+
+            if (processes.Length > 0)
+            {
+                try { return processes[0].MainModule.FileName; }
+                catch { return string.Empty; }
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         #region Settings for Variables
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -270,20 +332,20 @@ namespace meautosd
 
         private void rbShutdown_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbShutdown.Checked == true)
-                Settings.Default.afterEncoding = 0;
-        }
-
+           // if (rbShutdown.Checked == true)
+           //     Settings.Default.afterEncoding = 0;
+        }      
+               
         private void rbStandby_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbStandby.Checked == true)
-                Settings.Default.afterEncoding = 1;
+           // if (rbStandby.Checked == true)
+           //     Settings.Default.afterEncoding = 1;
         }
 
         private void rbHibernate_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbHibernate.Checked == true)
-                Settings.Default.afterEncoding = 2;
+           // if (rbHibernate.Checked == true)
+           //     Settings.Default.afterEncoding = 2;
         }
 
         private void cbClose_CheckedChanged(object sender, EventArgs e)
@@ -321,6 +383,29 @@ namespace meautosd
                 
         }
 
+        private void nudDelay_ValueChanged_1(object sender, EventArgs e)
+        {
+            Settings.Default.delayTime = (int)nudDelay.Value;
+        }
+
+        private void pbDonate_Click(object sender, EventArgs e)
+        {
+            fDonate fDonate = new fDonate();
+            fDonate.ShowDialog();
+        }
+
+        private void cbTask_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cbTask.Text == "Shutdown")
+                Settings.Default.afterEncoding = 0;
+            else if (cbTask.Text == "Hibernate")
+                Settings.Default.afterEncoding = 2;
+            else if (cbTask.Text == "Standby")
+                Settings.Default.afterEncoding = 1;
+            else if (cbTask.Text == "Do Nothing")
+                Settings.Default.afterEncoding = 3;
+        }
+
         private void timer3_Tick(object sender, EventArgs e)
         {
             countDown = countDown - 1;
@@ -332,13 +417,31 @@ namespace meautosd
 
             if (countDown == 0)
             {
-                if (rbShutdown.Checked)
-                    shutDown();
-                else if (rbStandby.Checked)
-                    standBy();
-                else if (rbHibernate.Checked)
-                    hibernate();
+                switch (Settings.Default.afterEncoding)
+                {
+                    case 0:
+                        shutDown();
+                        break;
+
+                    case 1:
+                        standBy();
+                        break;
+
+                    case 2:
+                        hibernate();
+                        break;
+                }
             }
+
+            //if (countDown == 0)
+            //{
+            //    if (rbShutdown.Checked)
+            //        shutDown();
+            //    else if (rbStandby.Checked)
+            //        standBy();
+            //    else if (rbHibernate.Checked)
+            //        hibernate();
+            //}
 
         }
 
@@ -351,6 +454,9 @@ namespace meautosd
         {
             Settings.Default.writeLog = cbWriteLog.Checked;
         }
+
+
+
         #endregion
     }
 }

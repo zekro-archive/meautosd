@@ -142,5 +142,65 @@ namespace meautosd.Properties {
                 this["firstStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool dontShowDonate {
+            get {
+                return ((bool)(this["dontShowDonate"]));
+            }
+            set {
+                this["dontShowDonate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool dontShowSurvey {
+            get {
+                return ((bool)(this["dontShowSurvey"]));
+            }
+            set {
+                this["dontShowSurvey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AMEPath {
+            get {
+                return ((string)(this["AMEPath"]));
+            }
+            set {
+                this["AMEPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TVRPath {
+            get {
+                return ((string)(this["TVRPath"]));
+            }
+            set {
+                this["TVRPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool openAMEOnStartup {
+            get {
+                return ((bool)(this["openAMEOnStartup"]));
+            }
+            set {
+                this["openAMEOnStartup"] = value;
+            }
+        }
     }
 }

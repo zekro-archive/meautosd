@@ -26,6 +26,15 @@ namespace meautosd
             tbPbToken.Text = Settings.Default.pbToken;
             cbPbSend.Checked = Settings.Default.pbSend;
             cbDelete.Checked = Settings.Default.deleFinishFile;
+            tbAMELoc.Text = Settings.Default.AMEPath;
+            cbAMEStartup.Checked = Settings.Default.openAMEOnStartup;
+
+            if (Settings.Default.AMEPath == "")
+            {
+                timer1.Start();
+                tbAMELoc.Text = "Please open the AME that the Tool is able to catch the Path.";
+            }
+                
         }
 
         private void btLocFile_Click(object sender, EventArgs e)
@@ -64,6 +73,37 @@ namespace meautosd
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             cPush.send(tbPbToken.Text, "AME Auto Shutdown", "Test message.");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Process[] process = Process.GetProcessesByName("Adobe Media Encoder");
+
+            if (process.Length > 0)
+            {
+                Settings.Default.AMEPath = GetProcessPath("Adobe Media Encoder");
+                tbAMELoc.Text = Settings.Default.AMEPath;
+            }
+        }
+
+        public string GetProcessPath(string name)
+        {
+            Process[] processes = Process.GetProcessesByName(name);
+
+            if (processes.Length > 0)
+            {
+                try { return processes[0].MainModule.FileName; }
+                catch { return string.Empty; }
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        private void cbAMEStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.openAMEOnStartup = cbAMEStartup.Checked;
         }
     }
 }

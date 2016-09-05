@@ -35,6 +35,26 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fDonate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fDonate.Designer.cs">
+      <DependentUpon>fDonate.cs</DependentUpon>
+    </Compile>
     <Compile Include="fInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +102,12 @@
     <Compile Include="fSettings.Designer.cs">
       <DependentUpon>fSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="fSurvey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSurvey.Designer.cs">
+      <DependentUpon>fSurvey.cs</DependentUpon>
+    </Compile>
     <Compile Include="fUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fDonate.resx">
+      <DependentUpon>fDonate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fInfo.resx">
       <DependentUpon>fInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +131,9 @@
     <EmbeddedResource Include="fSettings.resx">
       <DependentUpon>fSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fSurvey.resx">
+      <DependentUpon>fSurvey.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fUpdate.resx">
       <DependentUpon>fUpdate.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +145,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -122,11 +161,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="recources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="recources\status_ready.png" />
+    <None Include="recources\status_notready.png" />
+    <None Include="recources\status_finish.png" />
+    <None Include="recources\status_error.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -126,5 +126,10 @@ namespace meautosd
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://docs.google.com/forms/d/e/1FAIpQLSdoHNP9ptB51WhLsEqi4qU-4QQy3tjn3Nf7LbGtlM8JopsWzQ/viewform");
+        }
     }
 }
