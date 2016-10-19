@@ -12,3 +12,7 @@ C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\x64\Debug\meautosd.csproj.GenerateResource.Cache
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\x64\Debug\meautosd.exe
 C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\x64\Debug\meautosd.pdb
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\x64\Debug\meautosd.csprojResolveAssemblyReference.cache
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\bin\x64\Debug\CSCore.dll
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\bin\x64\Debug\CSCore.xml
+C:\Users\Ringo Hoffmann\documents\visual studio 2015\Projects\meautosd\meautosd\obj\x64\Debug\meautosd.fSoundInfo.resources

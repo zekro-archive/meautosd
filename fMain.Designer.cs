@@ -50,6 +50,12 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbStatus = new System.Windows.Forms.PictureBox();
             this.pbDonate = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbCPU = new System.Windows.Forms.Label();
+            this.pcCPU = new System.Diagnostics.PerformanceCounter();
+            this.perfTimer = new System.Windows.Forms.Timer(this.components);
+            this.lbRAM = new System.Windows.Forms.Label();
+            this.pcRAM = new System.Diagnostics.PerformanceCounter();
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHrs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).BeginInit();
@@ -57,6 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDonate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).BeginInit();
             this.SuspendLayout();
             // 
             // lbStatus
@@ -75,10 +83,10 @@
             // 
             // btCancelTask
             // 
-            this.btCancelTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btCancelTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancelTask.Enabled = false;
             this.btCancelTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCancelTask.Location = new System.Drawing.Point(23, 226);
+            this.btCancelTask.Location = new System.Drawing.Point(23, 229);
             this.btCancelTask.Name = "btCancelTask";
             this.btCancelTask.Size = new System.Drawing.Size(103, 22);
             this.btCancelTask.TabIndex = 10;
@@ -88,9 +96,9 @@
             // 
             // lbTask
             // 
-            this.lbTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTask.AutoSize = true;
-            this.lbTask.Location = new System.Drawing.Point(145, 231);
+            this.lbTask.Location = new System.Drawing.Point(148, 234);
             this.lbTask.Name = "lbTask";
             this.lbTask.Size = new System.Drawing.Size(0, 13);
             this.lbTask.TabIndex = 11;
@@ -102,9 +110,9 @@
             // 
             // btStartTimer
             // 
-            this.btStartTimer.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btStartTimer.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btStartTimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btStartTimer.Location = new System.Drawing.Point(292, 141);
+            this.btStartTimer.Location = new System.Drawing.Point(292, 158);
             this.btStartTimer.Name = "btStartTimer";
             this.btStartTimer.Size = new System.Drawing.Size(83, 22);
             this.btStartTimer.TabIndex = 16;
@@ -243,8 +251,9 @@
             // 
             // pbDonate
             // 
+            this.pbDonate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbDonate.Image = ((System.Drawing.Image)(resources.GetObject("pbDonate.Image")));
-            this.pbDonate.Location = new System.Drawing.Point(404, 233);
+            this.pbDonate.Location = new System.Drawing.Point(399, 228);
             this.pbDonate.Name = "pbDonate";
             this.pbDonate.Size = new System.Drawing.Size(23, 23);
             this.pbDonate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -252,12 +261,61 @@
             this.pbDonate.TabStop = false;
             this.pbDonate.Click += new System.EventHandler(this.pbDonate_Click);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 254);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(415, 13);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "____________________________________________________________________\r\n";
+            // 
+            // lbCPU
+            // 
+            this.lbCPU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbCPU.AutoSize = true;
+            this.lbCPU.Location = new System.Drawing.Point(244, 275);
+            this.lbCPU.Name = "lbCPU";
+            this.lbCPU.Size = new System.Drawing.Size(55, 13);
+            this.lbCPU.TabIndex = 27;
+            this.lbCPU.Text = "CPU: 00%";
+            // 
+            // pcCPU
+            // 
+            this.pcCPU.CategoryName = "Prozessor";
+            this.pcCPU.CounterName = "Prozessorzeit (%)";
+            this.pcCPU.InstanceName = "_Total";
+            // 
+            // perfTimer
+            // 
+            this.perfTimer.Interval = 1000;
+            this.perfTimer.Tick += new System.EventHandler(this.perfTimer_Tick);
+            // 
+            // lbRAM
+            // 
+            this.lbRAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRAM.AutoSize = true;
+            this.lbRAM.Location = new System.Drawing.Point(329, 275);
+            this.lbRAM.Name = "lbRAM";
+            this.lbRAM.Size = new System.Drawing.Size(71, 13);
+            this.lbRAM.TabIndex = 28;
+            this.lbRAM.Text = "|    RAM: 00%";
+            // 
+            // pcRAM
+            // 
+            this.pcRAM.CategoryName = "Arbeitsspeicher";
+            this.pcRAM.CounterName = "Zugesicherte verwendete Bytes (%)";
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(434, 261);
+            this.ClientSize = new System.Drawing.Size(434, 295);
+            this.Controls.Add(this.lbRAM);
+            this.Controls.Add(this.lbCPU);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pbDonate);
             this.Controls.Add(this.pbStatus);
             this.Controls.Add(this.pictureBox2);
@@ -290,6 +348,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDonate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcCPU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcRAM)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,6 +376,12 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pbStatus;
         private System.Windows.Forms.PictureBox pbDonate;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCPU;
+        private System.Diagnostics.PerformanceCounter pcCPU;
+        private System.Windows.Forms.Timer perfTimer;
+        private System.Windows.Forms.Label lbRAM;
+        private System.Diagnostics.PerformanceCounter pcRAM;
     }
 }
 

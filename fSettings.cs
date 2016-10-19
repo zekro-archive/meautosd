@@ -28,6 +28,7 @@ namespace meautosd
             cbDelete.Checked = Settings.Default.deleFinishFile;
             tbAMELoc.Text = Settings.Default.AMEPath;
             cbAMEStartup.Checked = Settings.Default.openAMEOnStartup;
+            cbUseSound.Checked = Settings.Default.useSound;
 
             if (Settings.Default.AMEPath == "")
             {
@@ -51,6 +52,7 @@ namespace meautosd
             Settings.Default.pbToken = tbPbToken.Text;
             Settings.Default.pbSend = cbPbSend.Checked;
             Settings.Default.deleFinishFile = cbDelete.Checked;
+            Settings.Default.useSound = cbUseSound.Checked;
             Settings.Default.Save();
             this.Close();
         }
@@ -104,6 +106,22 @@ namespace meautosd
         private void cbAMEStartup_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.openAMEOnStartup = cbAMEStartup.Checked;
+        }
+
+        private void cbUseSound_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbDelete_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            fSoundInfo info = new fSoundInfo();
+            info.ShowDialog();
         }
     }
 }

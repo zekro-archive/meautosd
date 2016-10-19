@@ -37,6 +37,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.rtbChangelogs = new System.Windows.Forms.RichTextBox();
             this.cbAccept = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -47,7 +49,7 @@
             this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btOK.ForeColor = System.Drawing.Color.White;
-            this.btOK.Location = new System.Drawing.Point(297, 251);
+            this.btOK.Location = new System.Drawing.Point(297, 295);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(82, 22);
             this.btOK.TabIndex = 4;
@@ -62,19 +64,21 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(372, 228);
+            this.tabControl1.Size = new System.Drawing.Size(372, 270);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage1.Controls.Add(this.linkLabel2);
+            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.linkLabel1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(364, 202);
+            this.tabPage1.Size = new System.Drawing.Size(364, 244);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Read me";
             // 
@@ -98,6 +102,7 @@
             this.label1.Size = new System.Drawing.Size(357, 111);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tabPage2
             // 
@@ -123,8 +128,9 @@
             // 
             // cbAccept
             // 
+            this.cbAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAccept.AutoSize = true;
-            this.cbAccept.Location = new System.Drawing.Point(219, 255);
+            this.cbAccept.Location = new System.Drawing.Point(218, 300);
             this.cbAccept.Name = "cbAccept";
             this.cbAccept.Size = new System.Drawing.Size(60, 17);
             this.cbAccept.TabIndex = 6;
@@ -132,12 +138,32 @@
             this.cbAccept.UseVisualStyleBackColor = true;
             this.cbAccept.CheckedChanged += new System.EventHandler(this.cbAccept_CheckedChanged);
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(7, 154);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(349, 33);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Also I have included the CSCore Audio Library by CodePlex:\r\n\r\n\r\n";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.linkLabel2.Location = new System.Drawing.Point(7, 179);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(144, 13);
+            this.linkLabel2.TabIndex = 3;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "https://cscore.codeplex.com";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
             // fFirstStartup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(391, 285);
+            this.ClientSize = new System.Drawing.Size(391, 329);
             this.Controls.Add(this.cbAccept);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btOK);
@@ -170,5 +196,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtbChangelogs;
         private System.Windows.Forms.CheckBox cbAccept;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Label label2;
     }
 }

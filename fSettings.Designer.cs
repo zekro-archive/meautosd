@@ -51,6 +51,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbAMELoc = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cbUseSound = new System.Windows.Forms.CheckBox();
+            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -89,7 +91,7 @@
             // 
             this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOK.Location = new System.Drawing.Point(229, 431);
+            this.btOK.Location = new System.Drawing.Point(229, 467);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(82, 22);
             this.btOK.TabIndex = 3;
@@ -101,7 +103,7 @@
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCancel.Location = new System.Drawing.Point(317, 431);
+            this.btCancel.Location = new System.Drawing.Point(317, 467);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(82, 22);
             this.btCancel.TabIndex = 4;
@@ -143,7 +145,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 127);
+            this.label3.Location = new System.Drawing.Point(7, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(286, 26);
             this.label3.TabIndex = 8;
@@ -152,6 +154,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.linkLabel4);
+            this.groupBox1.Controls.Add(this.cbUseSound);
             this.groupBox1.Controls.Add(this.cbDelete);
             this.groupBox1.Controls.Add(this.tbLocFile);
             this.groupBox1.Controls.Add(this.label3);
@@ -163,7 +167,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(10, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(390, 193);
+            this.groupBox1.Size = new System.Drawing.Size(390, 230);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Miscellaneous Settings";
@@ -171,12 +175,13 @@
             // cbDelete
             // 
             this.cbDelete.AutoSize = true;
-            this.cbDelete.Location = new System.Drawing.Point(10, 165);
+            this.cbDelete.Location = new System.Drawing.Point(10, 198);
             this.cbDelete.Name = "cbDelete";
             this.cbDelete.Size = new System.Drawing.Size(171, 17);
             this.cbDelete.TabIndex = 11;
             this.cbDelete.Text = "Delete finish file after encoding";
             this.cbDelete.UseVisualStyleBackColor = true;
+            this.cbDelete.CheckedChanged += new System.EventHandler(this.cbDelete_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -186,7 +191,7 @@
             this.groupBox2.Controls.Add(this.linkLabel2);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(10, 211);
+            this.groupBox2.Location = new System.Drawing.Point(10, 248);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(390, 111);
             this.groupBox2.TabIndex = 10;
@@ -252,7 +257,7 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.tbAMELoc);
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(10, 331);
+            this.groupBox3.Location = new System.Drawing.Point(10, 368);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(390, 86);
             this.groupBox3.TabIndex = 12;
@@ -293,12 +298,35 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cbUseSound
+            // 
+            this.cbUseSound.AutoSize = true;
+            this.cbUseSound.Location = new System.Drawing.Point(10, 130);
+            this.cbUseSound.Name = "cbUseSound";
+            this.cbUseSound.Size = new System.Drawing.Size(149, 17);
+            this.cbUseSound.TabIndex = 12;
+            this.cbUseSound.Text = "Use sound to detect finish";
+            this.cbUseSound.UseVisualStyleBackColor = true;
+            this.cbUseSound.CheckedChanged += new System.EventHandler(this.cbUseSound_CheckedChanged);
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.LinkColor = System.Drawing.Color.Cyan;
+            this.linkLabel4.Location = new System.Drawing.Point(157, 130);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(19, 13);
+            this.linkLabel4.TabIndex = 13;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "[?]";
+            this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            // 
             // fSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.ClientSize = new System.Drawing.Size(412, 466);
+            this.ClientSize = new System.Drawing.Size(412, 502);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -344,5 +372,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbAMELoc;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox cbUseSound;
+        private System.Windows.Forms.LinkLabel linkLabel4;
     }
 }

@@ -1,4 +1,5 @@
-﻿using meautosd.Properties;
+﻿using CSCore.CoreAudioAPI;
+using meautosd.Properties;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,8 +23,8 @@ namespace meautosd
         #region Vars
 
         public int status = 0, //0 - AME not started, 1 - Waiting for End of renderlist, 2 - Shutdown
-                   time; 
-        public bool enabled_btCancelTask = false, finished = false;
+                   time;
+        public bool enabled_btCancelTask = false, finished = false, sound = false;
         public string taskType;
         public decimal tTime, countDown;
 
@@ -64,6 +66,7 @@ namespace meautosd
             cbWriteLog.Checked = Settings.Default.writeLog;
 
             timer.Start();
+            perfTimer.Start();
 
             try
             {
@@ -104,88 +107,124 @@ namespace meautosd
         {
             Process[] process = Process.GetProcessesByName("Adobe Media Encoder");
 
-            if (Settings.Default.finishLocation != "" && Settings.Default.finishName != "" && process.Length != 0)
+            if (!Settings.Default.useSound)
             {
-                status = 1;
-                lbStatus.Text = "Waiting for finishing the render lsit.";
-                lbStatus.ForeColor = Color.Cyan;
-                pbStatus.Image = Properties.Resources.status_ready;
-            } else if (Settings.Default.finishLocation != "" && Settings.Default.finishName != "")
+                if (Settings.Default.finishLocation != "" && Settings.Default.finishName != "" && process.Length != 0)
+                {
+                    status = 1;
+                    lbStatus.Text = "Waiting for finishing the render lsit.";
+                    lbStatus.ForeColor = Color.Cyan;
+                    pbStatus.Image = Properties.Resources.status_ready;
+                }
+                else if (Settings.Default.finishLocation != "" && Settings.Default.finishName != "")
+                {
+                    status = 0;
+                    lbStatus.Text = "Adobe Media Encoder is not started.";
+                    lbStatus.ForeColor = Color.Gray;
+                    pbStatus.Image = Properties.Resources.status_notready;
+                }
+                else if (Settings.Default.finishLocation == "")
+                {
+                    lbStatus.Text = "Finish file location is not set!";
+                    lbStatus.ForeColor = Color.Red;
+                    pbStatus.Image = Properties.Resources.status_error;
+                }
+                else if (Settings.Default.finishName == "")
+                {
+                    lbStatus.Text = "Finish file name is not set!";
+                    lbStatus.ForeColor = Color.Red;
+                    pbStatus.Image = Properties.Resources.status_error;
+                }
+            } else
             {
-                status = 0;
-                lbStatus.Text = "Adobe Media Encoder is not started.";
-                lbStatus.ForeColor = Color.Gray;
-                pbStatus.Image = Properties.Resources.status_notready;
-            } else if (Settings.Default.finishLocation == "")
-            {
-                lbStatus.Text = "Finish file location is not set!";
-                lbStatus.ForeColor = Color.Red;
-                pbStatus.Image = Properties.Resources.status_error;
-            } else if (Settings.Default.finishName == "")
-            {
-                lbStatus.Text = "Finish file name is not set!";
-                lbStatus.ForeColor = Color.Red;
-                pbStatus.Image = Properties.Resources.status_error;
+                if (process.Length != 0)
+                {
+                    status = 1;
+                    lbStatus.Text = "Waiting for finishing the render lsit.";
+                    lbStatus.ForeColor = Color.Cyan;
+                    pbStatus.Image = Properties.Resources.status_ready;
+                }
+                else
+                {
+                    status = 0;
+                    lbStatus.Text = "Adobe Media Encoder is not started.";
+                    lbStatus.ForeColor = Color.Gray;
+                    pbStatus.Image = Properties.Resources.status_notready;
+                }
             }
 
-
-            if (File.Exists(Settings.Default.finishLocation + "//" + Settings.Default.finishName) && status == 1 && !finished)
+            if (File.Exists(Settings.Default.finishLocation + "//" + Settings.Default.finishName) && status == 1 && !finished && !Settings.Default.useSound)
             {
-                status = 2;
-                lbStatus.Text = "Rendering Finished.";
-                lbStatus.ForeColor = Color.LimeGreen;
-                pbStatus.Image = Properties.Resources.status_finish;
-                timer.Stop();
+                taskAfterFinish();
+            }
 
-                switch (Settings.Default.afterEncoding)
+            if (Settings.Default.useSound)
+            {
+                detectSoundVolume();
+                if (sound)
                 {
-                    //SHUTDOWN
-                    case 0:
-                        deleteFinishFile();
-                        shutDown();
-                        break;
-
-                    //STANDBY
-                    case 1:
-                        btCancelTask.Enabled = true;
-                        enabled_btCancelTask = true;
-                        timer1.Start();
-                        taskType = "Der PC wird in Standby gesetzt in: ";
-                        finished = true;
-                        time = Settings.Default.delayTime * 60;
-                        MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        deleteFinishFile();
-                        break;
-
-                    //HIBERNATE
-                    case 2:
-                        btCancelTask.Enabled = true;
-                        enabled_btCancelTask = true;
-                        timer1.Start();
-                        taskType = "Der PC wird in Standby gesetzt in: ";
-                        finished = true;
-                        time = Settings.Default.delayTime * 60;
-                        MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        deleteFinishFile();
-                        break;
-
-                    //DO NOTHING
-                    case 3:
-                        btCancelTask.Enabled = true;
-                        enabled_btCancelTask = true;
-                        taskType = "";
-                        finished = true;
-                        time = Settings.Default.delayTime * 60;
-                        deleteFinishFile();
-
-                        MessageBox.Show("Rendering completed.", "Rendering completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        if (Settings.Default.pbSend && Settings.Default.pbToken != "")
-                        {
-                            cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Rendering completed.");
-                        }
-
-                        break;
+                    taskAfterFinish();
+                    sound = false;
                 }
+            }
+        }
+
+        private void taskAfterFinish()
+        {
+            status = 2;
+            lbStatus.Text = "Rendering Finished.";
+            lbStatus.ForeColor = Color.LimeGreen;
+            pbStatus.Image = Properties.Resources.status_finish;
+            timer.Stop();
+
+            switch (Settings.Default.afterEncoding)
+            {
+                //SHUTDOWN
+                case 0:
+                    deleteFinishFile();
+                    shutDown();
+                    break;
+
+                //STANDBY
+                case 1:
+                    btCancelTask.Enabled = true;
+                    enabled_btCancelTask = true;
+                    timer1.Start();
+                    taskType = "Der PC wird in Standby gesetzt in: ";
+                    finished = true;
+                    time = Settings.Default.delayTime * 60;
+                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    deleteFinishFile();
+                    break;
+
+                //HIBERNATE
+                case 2:
+                    btCancelTask.Enabled = true;
+                    enabled_btCancelTask = true;
+                    timer1.Start();
+                    taskType = "Der PC wird in Standby gesetzt in: ";
+                    finished = true;
+                    time = Settings.Default.delayTime * 60;
+                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    deleteFinishFile();
+                    break;
+
+                //DO NOTHING
+                case 3:
+                    btCancelTask.Enabled = true;
+                    enabled_btCancelTask = true;
+                    taskType = "";
+                    finished = true;
+                    time = Settings.Default.delayTime * 60;
+                    deleteFinishFile();
+
+                    MessageBox.Show("Rendering completed.", "Rendering completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (Settings.Default.pbSend && Settings.Default.pbToken != "")
+                    {
+                        cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Rendering completed.");
+                    }
+
+                    break;
             }
         }
 
@@ -292,7 +331,7 @@ namespace meautosd
         public void deleteFinishFile()
         {
             string filepath = Settings.Default.finishLocation + "//" + Settings.Default.finishName;
-            if (Settings.Default.deleFinishFile && File.Exists(filepath))
+            if (Settings.Default.deleFinishFile && File.Exists(filepath) && !Settings.Default.useSound)
             {
                 File.Delete(filepath);
             }
@@ -323,6 +362,63 @@ namespace meautosd
                 return string.Empty;
             }
         }
+
+
+        private void detectSoundVolume()
+        {
+            //AllocConsole();
+            try
+            {
+                float audio;
+
+                AudioSessionManager2 sessionManager = GetDefaultAudioSessionManager2(DataFlow.Render);
+                AudioSessionEnumerator sessionEnumerator = sessionManager.GetSessionEnumerator();
+
+                AudioSessionControl2 sessionControl;
+
+                foreach (AudioSessionControl session in sessionEnumerator)
+                {
+                    sessionControl = session.QueryInterface<AudioSessionControl2>();
+                    //Console.WriteLine(sessionControl.Process.MainWindowTitle);
+                    if (sessionControl.Process.MainWindowTitle.Contains("Adobe Media Encoder"))
+                    {
+                        audio = session.QueryInterface<AudioMeterInformation>().PeakValue;
+                        Console.WriteLine(audio.ToString());
+                        if (audio > 0.1)
+                            sound = true;
+                        break;
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("ERROR " + exc);
+            }
+        }
+
+        private static AudioSessionManager2 GetDefaultAudioSessionManager2(DataFlow dataFlow)
+        {
+            using (var enumerator = new MMDeviceEnumerator())
+            {
+                using (var device = enumerator.GetDefaultAudioEndpoint(dataFlow, Role.Multimedia))
+                {
+                    Debug.WriteLine("DefaultDevice: " + device.FriendlyName);
+                    var sessionManager = AudioSessionManager2.FromMMDevice(device);
+                    return sessionManager;
+                }
+            }
+        }
+
+        private void perfTimer_Tick(object sender, EventArgs e)
+        {
+            lbCPU.Text = "CPU: " + pcCPU.NextValue().ToString("0.00") + " %";
+            lbRAM.Text = "|    RAM: " + pcRAM.NextValue().ToString("0.00") + " %";
+        }
+
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         #region Settings for Variables
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)

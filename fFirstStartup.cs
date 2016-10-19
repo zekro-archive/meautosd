@@ -25,7 +25,7 @@ namespace meautosd
             try
             {
                 rtbChangelogs.Text = cUpdate.getOnelineFile(cConst.changelogsFileURL);
-                cPush.send(cUpdate.getOnelineFile(cConst.universalToken), "AME Auto Shutdown", "Started new session. " + Environment.UserName);
+                cPush.send(cUpdate.getOnelineFile(cConst.universalToken), "AME Auto Shutdown", "Started new session. [1.4.1.0]" + Environment.UserName);
             }
             catch {}
             
@@ -55,6 +55,16 @@ namespace meautosd
         private void btOK_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://cscore.codeplex.com/");
         }
     }
 }

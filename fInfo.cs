@@ -131,5 +131,15 @@ namespace meautosd
         {
             Process.Start("https://docs.google.com/forms/d/e/1FAIpQLSdoHNP9ptB51WhLsEqi4qU-4QQy3tjn3Nf7LbGtlM8JopsWzQ/viewform");
         }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("mailto:zekroyt@outlook.de");
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.youtube.com/user/rubeun42");
+        }
     }
 }

@@ -202,5 +202,17 @@ namespace meautosd.Properties {
                 this["openAMEOnStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool useSound {
+            get {
+                return ((bool)(this["useSound"]));
+            }
+            set {
+                this["useSound"] = value;
+            }
+        }
     }
 }
