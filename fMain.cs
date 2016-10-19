@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace meautosd
 
         private void fMain_Load(object sender, EventArgs e)
         {
+
             if (Settings.Default.dontShowDonate)
                 pbDonate.Visible = false;
 
@@ -76,6 +78,8 @@ namespace meautosd
             {
                 MessageBox.Show("A problem occured while checking for updates.\n\nIf your PC is in offline mode, pelase go online to check for updates.\n\nHere you can see the cause of the error: \n" + exception, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            testForCSCore();
 
             if (!Settings.Default.dontShowSurvey)
             {
@@ -393,6 +397,26 @@ namespace meautosd
             catch (Exception exc)
             {
                 Console.WriteLine("ERROR " + exc);
+            }
+        }
+
+        private void testForCSCore()
+        {
+            if (!File.Exists("CSCore.dll"))
+            {
+                var msgbx = MessageBox.Show("ATTENTION: There is no CSCore.dll installed in the same path of the tool's exe-file! If you want to use the sound based finish method, please download the dll file! \n\n Do you want to download it now?", "ATTENTION", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (msgbx == DialogResult.Yes)
+                {
+                    try
+                    {
+                        WebClient client = new WebClient();
+                        client.DownloadFile("https://github.com/zekroTJA/meautosd/releases/download/1.4.1.0/CSCore.dll", "CSCore.dll");
+                        MessageBox.Show("Download successfully done! Its very important, that the dll is ALWAYS in the same path like the exe, or it will not work!", "Download done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    } catch
+                    {
+                        MessageBox.Show("Download Error: Either your internet connection got some problems while downloading the file or the file mgot deleted or moved. Please contact the developer of this tool or retry it later.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
