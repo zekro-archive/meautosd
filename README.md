@@ -20,9 +20,9 @@ This tool allows you to **shut down you PC** or set it to stand by or hibernate 
 ### Screenshots
 
 
-![Screenshot: Main Tool](https://dl.dropboxusercontent.com/s/ok7rfj1e6pjtufd/ameautosd_screenshot%20%281%29.png "Screenshot: Main Tool")
+![Screenshot: Main Tool](http://image.prntscr.com/image/d10567e2dbfb4303b63586a73a515d81.png "Screenshot: Main Tool")
 
-![Screenshot: Settings](https://dl.dropboxusercontent.com/s/r6spjosi2praf9a/ameautosd_screenshot%20%282%29.png "Screenshot: Settings")
+![Screenshot: Settings](http://image.prntscr.com/image/3a3b4104a3bf4011a27cfda6fa2ae946.png "Screenshot: Settings")
 
 -----
 
