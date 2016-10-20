@@ -11,11 +11,9 @@ This tool allows you to **shut down you PC** or set it to stand by or hibernate 
 
 ### Download
 
-[**`[CHANGELOGS]`**](http://pastebin.com/raw/vWCKaf4t "http://pastebin.com/raw/vWCKaf4t")
+[**[CHANGELOGS]**](http://pastebin.com/raw/vWCKaf4t)
 
-* [AME Auto Shutdown Tool v.1.2.1.0](https://github.com/zekroTJA/meautosd/releases/download/1.2.1.0/meautosd.exe "https://github.com/zekroTJA/meautosd/releases/download/1.2.1.0/meautosd.exe") `[LATEST]`
-* [AME Auto Shutdown Tool v.1.2.0.0](https://github.com/zekroTJA/meautosd/releases/download/1.2.0.0/meautosd.exe "https://github.com/zekroTJA/meautosd/releases/download/1.2.0.0/meautosd.exe")
-* [AME Auto Shutdown Tool v.1.1.4.0](https://github.com/zekroTJA/meautosd/releases/download/1.1.4.0/meautosd.exe "https://github.com/zekroTJA/meautosd/releases/download/1.1.4.0/meautosd.exe")
+[**[LATEST DOWNLOAD]**](http://zekrodev.jimdo.com/ameautoshutdown)
 
 -----
 
