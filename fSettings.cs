@@ -29,13 +29,35 @@ namespace meautosd
             tbAMELoc.Text = Settings.Default.AMEPath;
             cbAMEStartup.Checked = Settings.Default.openAMEOnStartup;
             cbUseSound.Checked = Settings.Default.useSound;
+            tbLogLoc.Text = Settings.Default.logFileLoc;
 
             if (Settings.Default.AMEPath == "")
             {
                 timer1.Start();
                 tbAMELoc.Text = "Please open the AME that the Tool is able to catch the Path.";
             }
-                
+
+            if (cbUseSound.Checked)
+            {
+                tbLocFile.Enabled = false;
+                tbFileName.Enabled = false;
+                btLocFile.Enabled = false;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                linkLabel1.Enabled = false;
+                cbDelete.Enabled = false;
+            }
+            else
+            {
+                tbLocFile.Enabled = true;
+                tbFileName.Enabled = true;
+                btLocFile.Enabled = true;
+                label1.Enabled = true;
+                label2.Enabled = true;
+                linkLabel1.Enabled = true;
+                cbDelete.Enabled = true;
+            }
+
         }
 
         private void btLocFile_Click(object sender, EventArgs e)
@@ -110,7 +132,26 @@ namespace meautosd
 
         private void cbUseSound_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (cbUseSound.Checked)
+            {
+                tbLocFile.Enabled = false;
+                tbFileName.Enabled = false;
+                btLocFile.Enabled = false;
+                label1.Enabled = false;
+                label2.Enabled = false;
+                linkLabel1.Enabled = false;
+                cbDelete.Enabled = false;
+            }
+            else
+            {
+                tbLocFile.Enabled = true;
+                tbFileName.Enabled = true;
+                btLocFile.Enabled = true;
+                label1.Enabled = true;
+                label2.Enabled = true;
+                linkLabel1.Enabled = true;
+                cbDelete.Enabled = true;
+            }
         }
 
         private void cbDelete_CheckedChanged(object sender, EventArgs e)
@@ -122,6 +163,14 @@ namespace meautosd
         {
             fSoundInfo info = new fSoundInfo();
             info.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+            Settings.Default.logFileLoc = dialog.SelectedPath.ToString() + @"\ameautosd_logfile.txt";
+            tbLogLoc.Text = dialog.SelectedPath.ToString() + @"\ameautosd_logfile.txt";
         }
     }
 }

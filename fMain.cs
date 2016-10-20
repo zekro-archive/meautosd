@@ -87,6 +87,12 @@ namespace meautosd
                 survey.ShowDialog();
             }
 
+            if (Settings.Default.logFileLoc == "")
+                Settings.Default.logFileLoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\ameautosd_logfile.txt";
+
+            if (Settings.Default.writeLog)
+                File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "STARTED SESSION" + Environment.NewLine);
+
             openToolsOnStartup();
         }
 
@@ -281,26 +287,32 @@ namespace meautosd
                 cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will shut down now.");
             }
 
+            //if (Settings.Default.writeLog)
+            //{
+            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
+            //    writer.WriteLine("SYSTEM SHUTDOWN:");
+            //    writer.WriteLine(System.DateTime.Now);
+            //    writer.Close();
+            //}
+
             if (Settings.Default.writeLog)
-            {
-                StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-                writer.WriteLine("SYSTEM SHUTDOWN:");
-                writer.WriteLine(System.DateTime.Now);
-                writer.Close();
-            }
+                File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM SHUTDOWN" + Environment.NewLine);
         }
 
         public void standBy()
         {
             Application.SetSuspendState(PowerState.Suspend, true, true);
 
+            //if (Settings.Default.writeLog)
+            //{
+            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
+            //    writer.WriteLine("SYSTEM STANDBY:");
+            //    writer.WriteLine(System.DateTime.Now);
+            //    writer.Close();
+            //}
+
             if (Settings.Default.writeLog)
-            {
-                StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-                writer.WriteLine("SYSTEM STANDBY:");
-                writer.WriteLine(System.DateTime.Now);
-                writer.Close();
-            }
+                File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM STANDBY" + Environment.NewLine);
 
             if (Settings.Default.pbSend && Settings.Default.pbToken != "")
             {
@@ -315,13 +327,16 @@ namespace meautosd
         {
             Process.Start(Environment.GetEnvironmentVariable("windir") + "//system32//rundll32.exe", "powrprof.dll, SetSuspendState");
 
+            //if (Settings.Default.writeLog)
+            //{
+            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
+            //    writer.WriteLine("SYSTEM HIBERNATE:");
+            //    writer.WriteLine(System.DateTime.Now);
+            //    writer.Close();
+            //}
+
             if (Settings.Default.writeLog)
-            {
-                StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-                writer.WriteLine("SYSTEM HIBERNATE:");
-                writer.WriteLine(System.DateTime.Now);
-                writer.Close();
-            }
+                File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM HIBERNATE" + Environment.NewLine);
 
             if (Settings.Default.pbSend && Settings.Default.pbToken != "")
             {
@@ -512,6 +527,16 @@ namespace meautosd
         {
             fDonate fDonate = new fDonate();
             fDonate.ShowDialog();
+        }
+
+        private void cbWriteLog_CheckedChanged_1(object sender, EventArgs e)
+        {
+            Settings.Default.writeLog = cbWriteLog.Checked;
+        }
+
+        private void llLogFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(Settings.Default.logFileLoc);
         }
 
         private void cbTask_SelectedIndexChanged_1(object sender, EventArgs e)

@@ -56,6 +56,7 @@
             this.perfTimer = new System.Windows.Forms.Timer(this.components);
             this.lbRAM = new System.Windows.Forms.Label();
             this.pcRAM = new System.Diagnostics.PerformanceCounter();
+            this.llLogFile = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHrs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).BeginInit();
@@ -199,6 +200,7 @@
             this.cbWriteLog.TabIndex = 19;
             this.cbWriteLog.Text = "Write log file";
             this.cbWriteLog.UseVisualStyleBackColor = false;
+            this.cbWriteLog.CheckedChanged += new System.EventHandler(this.cbWriteLog_CheckedChanged_1);
             // 
             // nudDelay
             // 
@@ -307,12 +309,25 @@
             this.pcRAM.CategoryName = "Arbeitsspeicher";
             this.pcRAM.CounterName = "Zugesicherte verwendete Bytes (%)";
             // 
+            // llLogFile
+            // 
+            this.llLogFile.AutoSize = true;
+            this.llLogFile.LinkColor = System.Drawing.Color.Cyan;
+            this.llLogFile.Location = new System.Drawing.Point(129, 165);
+            this.llLogFile.Name = "llLogFile";
+            this.llLogFile.Size = new System.Drawing.Size(39, 13);
+            this.llLogFile.TabIndex = 29;
+            this.llLogFile.TabStop = true;
+            this.llLogFile.Text = "[Open]";
+            this.llLogFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llLogFile_LinkClicked);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(434, 295);
+            this.Controls.Add(this.llLogFile);
             this.Controls.Add(this.lbRAM);
             this.Controls.Add(this.lbCPU);
             this.Controls.Add(this.label1);
@@ -382,6 +397,7 @@
         private System.Windows.Forms.Timer perfTimer;
         private System.Windows.Forms.Label lbRAM;
         private System.Diagnostics.PerformanceCounter pcRAM;
+        private System.Windows.Forms.LinkLabel llLogFile;
     }
 }
 

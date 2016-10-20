@@ -214,5 +214,17 @@ namespace meautosd.Properties {
                 this["useSound"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string logFileLoc {
+            get {
+                return ((string)(this["logFileLoc"]));
+            }
+            set {
+                this["logFileLoc"] = value;
+            }
+        }
     }
 }
