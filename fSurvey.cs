@@ -1,4 +1,5 @@
 ﻿using meautosd.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace meautosd
         private void fSurvey_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.dontShowSurvey = true;
+            Registry.SetValue(cConst.setKey, "dontShowSurvey", "true");
         }
 
         private void btOK_Click(object sender, EventArgs e)

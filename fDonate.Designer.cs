@@ -82,6 +82,7 @@
             this.MinimizeBox = false;
             this.Name = "fDonate";
             this.Text = "Donate";
+            this.Load += new System.EventHandler(this.fDonate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

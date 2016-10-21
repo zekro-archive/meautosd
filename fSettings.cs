@@ -1,4 +1,5 @@
 ﻿using meautosd.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static meautosd.cConst;
 
 namespace meautosd
 {
@@ -21,6 +24,7 @@ namespace meautosd
 
         private void fSettings_Load(object sender, EventArgs e)
         {
+
             tbLocFile.Text = Settings.Default.finishLocation;
             tbFileName.Text = Settings.Default.finishName;
             tbPbToken.Text = Settings.Default.pbToken;
@@ -30,6 +34,16 @@ namespace meautosd
             cbAMEStartup.Checked = Settings.Default.openAMEOnStartup;
             cbUseSound.Checked = Settings.Default.useSound;
             tbLogLoc.Text = Settings.Default.logFileLoc;
+
+            Registry.SetValue(setKey, "finishLocation", Settings.Default.finishLocation);
+            Registry.SetValue(setKey, "finishName", Settings.Default.finishName);
+            Registry.SetValue(setKey, "pbToken", Settings.Default.pbToken);
+            Registry.SetValue(setKey, "pbSend", Settings.Default.pbSend);
+            Registry.SetValue(setKey, "deleFinishFile", Settings.Default.deleFinishFile);
+            Registry.SetValue(setKey, "AMEPath", Settings.Default.AMEPath);
+            Registry.SetValue(setKey, "openAMEOnStartup", Settings.Default.openAMEOnStartup);
+            Registry.SetValue(setKey, "useSound", Settings.Default.useSound);
+            Registry.SetValue(setKey, "logFileLoc", Settings.Default.logFileLoc);
 
             if (Settings.Default.AMEPath == "")
             {
@@ -60,6 +74,22 @@ namespace meautosd
 
         }
 
+        public string GetProcessPath(string name)
+        {
+            Process[] processes = Process.GetProcessesByName(name);
+
+            if (processes.Length > 0)
+            {
+                try { return processes[0].MainModule.FileName; }
+                catch { return string.Empty; }
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        #region TIMERS & ELEMENTS
         private void btLocFile_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -110,21 +140,6 @@ namespace meautosd
             }
         }
 
-        public string GetProcessPath(string name)
-        {
-            Process[] processes = Process.GetProcessesByName(name);
-
-            if (processes.Length > 0)
-            {
-                try { return processes[0].MainModule.FileName; }
-                catch { return string.Empty; }
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
-
         private void cbAMEStartup_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.openAMEOnStartup = cbAMEStartup.Checked;
@@ -171,6 +186,26 @@ namespace meautosd
             dialog.ShowDialog();
             Settings.Default.logFileLoc = dialog.SelectedPath.ToString() + @"\ameautosd_logfile.txt";
             tbLogLoc.Text = dialog.SelectedPath.ToString() + @"\ameautosd_logfile.txt";
+        }
+        #endregion
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
+            var msgbox = MessageBox.Show("Do you really want to reset ALL settings for this tool?", "Reset Settings", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (msgbox == DialogResult.Yes)
+            {
+                if (key.OpenSubKey("AMEAutoShutdown") != null)
+                {
+                    key.DeleteSubKeyTree("AMEAutoShutdown");
+                }
+
+                Settings.Default.Reset();
+
+                Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                Application.Exit();
+            }
         }
     }
 }

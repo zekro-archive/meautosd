@@ -39,6 +39,8 @@
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tbLogLoc = new System.Windows.Forms.TextBox();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.cbUseSound = new System.Windows.Forms.CheckBox();
             this.cbDelete = new System.Windows.Forms.CheckBox();
@@ -53,8 +55,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbAMELoc = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tbLogLoc = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -174,6 +175,26 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Miscellaneous Settings";
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(296, 204);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(82, 22);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Search...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tbLogLoc
+            // 
+            this.tbLogLoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+            this.tbLogLoc.ForeColor = System.Drawing.Color.White;
+            this.tbLogLoc.Location = new System.Drawing.Point(10, 206);
+            this.tbLogLoc.Name = "tbLogLoc";
+            this.tbLogLoc.Size = new System.Drawing.Size(280, 20);
+            this.tbLogLoc.TabIndex = 14;
             // 
             // linkLabel4
             // 
@@ -324,25 +345,18 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // tbLogLoc
+            // button3
             // 
-            this.tbLogLoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-            this.tbLogLoc.ForeColor = System.Drawing.Color.White;
-            this.tbLogLoc.Location = new System.Drawing.Point(10, 206);
-            this.tbLogLoc.Name = "tbLogLoc";
-            this.tbLogLoc.Size = new System.Drawing.Size(280, 20);
-            this.tbLogLoc.TabIndex = 14;
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(296, 204);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 22);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Search...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.ForeColor = System.Drawing.Color.OrangeRed;
+            this.button3.Location = new System.Drawing.Point(122, 480);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(101, 22);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "Reset Settings";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // fSettings
             // 
@@ -350,6 +364,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(412, 515);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -399,5 +414,6 @@
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tbLogLoc;
+        private System.Windows.Forms.Button button3;
     }
 }

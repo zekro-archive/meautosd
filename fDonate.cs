@@ -1,4 +1,5 @@
 ﻿using meautosd.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,12 @@ namespace meautosd
         private void cbDontShowAgain_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.dontShowDonate = cbDontShowAgain.Checked;
+            Registry.SetValue(cConst.setKey, "dontShowDonate", cbDontShowAgain.Checked);
+        }
+
+        private void fDonate_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

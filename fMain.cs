@@ -45,6 +45,7 @@ namespace meautosd
 
         private void fMain_Load(object sender, EventArgs e)
         {
+            loadRegSettings();
 
             if (Settings.Default.dontShowDonate)
                 pbDonate.Visible = false;
@@ -454,15 +455,48 @@ namespace meautosd
             lbRAM.Text = "|    RAM: " + pcRAM.NextValue().ToString("0.00") + " %";
         }
 
+        private void loadRegSettings()
+        {
+            if ((string)Registry.GetValue(setKey, "AMEPath", "") != "")
+                Settings.Default.AMEPath = (string)Registry.GetValue(setKey, "AMEPath", "");
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+            if ((string)Registry.GetValue(setKey, "deleFinishFile", "") != "")
+                Settings.Default.deleFinishFile = Convert.ToBoolean(Registry.GetValue(setKey, "deleFinishFile", ""));
+
+            if ((string)Registry.GetValue(setKey, "finishLocation", "") != "")
+                Settings.Default.finishLocation = (string)Registry.GetValue(setKey, "finishLocation", "");
+
+            if ((string)Registry.GetValue(setKey, "finishName", "") != "")
+                Settings.Default.finishName = (string)Registry.GetValue(setKey, "finishName", "");
+
+            if ((string)Registry.GetValue(setKey, "openAMEOnStartup", "") != "")
+                Settings.Default.openAMEOnStartup = Convert.ToBoolean(Registry.GetValue(setKey, "openAMEOnStartup", ""));
+
+            if ((string)Registry.GetValue(setKey, "pbSend", "") != "")
+                Settings.Default.pbSend = Convert.ToBoolean(Registry.GetValue(setKey, "pbSend", ""));
+
+            if ((string)Registry.GetValue(setKey, "pbToken", "") != "")
+                Settings.Default.pbToken = (string)Registry.GetValue(setKey, "pbToken", "");
+
+            if ((string)Registry.GetValue(setKey, "useSound", "") != "")
+                Settings.Default.useSound = Convert.ToBoolean(Registry.GetValue(setKey, "useSound", ""));
+
+            if ((string)Registry.GetValue(setKey, "writeLog", "") != "")
+                Settings.Default.writeLog = Convert.ToBoolean(Registry.GetValue(setKey, "writeLog", ""));
+
+            if ((string)Registry.GetValue(setKey, "dontShowSurvey", "") != "")
+                Settings.Default.dontShowSurvey = Convert.ToBoolean(Registry.GetValue(setKey, "dontShowSurvey", ""));
+
+            if ((string)Registry.GetValue(setKey, "dontShowDonate", "") != "")
+                Settings.Default.dontShowDonate = Convert.ToBoolean(Registry.GetValue(setKey, "dontShowDonate", ""));
+
+        }
 
         #region Settings for Variables
         private void fMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.Save();
+            Registry.SetValue(setKey, "writeLog", Settings.Default.writeLog);
         }
 
         private void rbShutdown_CheckedChanged(object sender, EventArgs e)
@@ -603,5 +637,9 @@ namespace meautosd
 
 
         #endregion
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
     }
 }
