@@ -451,8 +451,8 @@ namespace meautosd
 
         private void perfTimer_Tick(object sender, EventArgs e)
         {
-            lbCPU.Text = "CPU: " + pcCPU.NextValue().ToString("0.00") + " %";
-            lbRAM.Text = "|    RAM: " + pcRAM.NextValue().ToString("0.00") + " %";
+            //lbCPU.Text = "CPU: " + pcCPU.NextValue().ToString("0.00") + " %";
+            //lbRAM.Text = "|    RAM: " + pcRAM.NextValue().ToString("0.00") + " %";
         }
 
         private void loadRegSettings()

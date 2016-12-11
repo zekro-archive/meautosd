@@ -25,7 +25,7 @@ namespace meautosd
             try
             {
                 rtbChangelogs.Text = cUpdate.getOnelineFile(cConst.changelogsFileURL);
-                cPush.send(cUpdate.getOnelineFile(cConst.universalToken), "AME Auto Shutdown", "Started new session. [1.4.3.0] - " + Environment.UserName);
+                cPush.send(cUpdate.getOnelineFile(cConst.universalToken), "AME Auto Shutdown", "Started new session. [" + cConst.VERSION + "] - " + Environment.UserName);
             }
             catch {}
             
