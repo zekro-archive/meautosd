@@ -1,6 +1,6 @@
 # ADOBE MEDIA ENCODER AUTO SHUTDOWN
 
-![icon](recources\icon-small.png "meautosd")
+![icon](recources/icon-small.png "meautosd")
 
 ### Description
 
@@ -22,11 +22,11 @@ See all [**[releases]**](https://github.com/zekroTJA/meautosd/releases "Releases
 
 ## Main Tool
 
-![Screenshot: Main Tool](recources\screenshots\main.png "Screenshot: Main Tool")
+![Screenshot: Main Tool](recources/screenshots/main.png "Screenshot: Main Tool")
 
 ## Settings
 
-![Screenshot: Settings](recources\screenshots\settings.png "Screenshot: Settings")
+![Screenshot: Settings](recources/screenshots/settings.png "Screenshot: Settings")
 
 -----
 
