@@ -1,6 +1,6 @@
 # ADOBE MEDIA ENCODER AUTO SHUTDOWN
 
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/zekroTJA/meautosd)
+[![Github All Releases](https://img.shields.io/github/downloads/zekrotja/meautosd/total.svg)](https://github.com/zekroTJA/meautosd)
 
 So you have some questions or want to join my developer community discord? Take a look! :^)
 <br/><a href="http://discord.zekro.de"><img src="https://discordapp.com/assets/fc0b01fe10a0b8c602fb0106d8189d9b.png" width="100"/></a>
