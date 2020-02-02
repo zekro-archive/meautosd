@@ -56,13 +56,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSCore, Version=1.1.5992.18249, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
-      <HintPath>..\packages\CSCore.1.1.0\lib\net35-client\CSCore.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.0.5.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -116,12 +114,6 @@
     <Compile Include="fSoundInfo.Designer.cs">
       <DependentUpon>fSoundInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="fSurvey.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fSurvey.Designer.cs">
-      <DependentUpon>fSurvey.cs</DependentUpon>
-    </Compile>
     <Compile Include="fUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,9 +139,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fSoundInfo.resx">
       <DependentUpon>fSoundInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fSurvey.resx">
-      <DependentUpon>fSurvey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fUpdate.resx">
       <DependentUpon>fUpdate.cs</DependentUpon>

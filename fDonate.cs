@@ -22,14 +22,8 @@ namespace meautosd
 
         private void btOK_Click(object sender, EventArgs e)
         {
-            Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X9RVAPQR5KCLY&lc=DE&item_name=zekro%20Development&no_note=1&no_shipping=1&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+            Process.Start("https://paypal.me/zekro");
             this.Close();
-        }
-
-        private void cbDontShowAgain_CheckedChanged(object sender, EventArgs e)
-        {
-            Settings.Default.dontShowDonate = cbDontShowAgain.Checked;
-            Registry.SetValue(cConst.setKey, "dontShowDonate", cbDontShowAgain.Checked);
         }
 
         private void fDonate_Load(object sender, EventArgs e)

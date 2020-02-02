@@ -47,9 +47,6 @@ namespace meautosd
         {
             loadRegSettings();
 
-            if (Settings.Default.dontShowDonate)
-                pbDonate.Visible = false;
-
             ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Settings", new EventHandler(openSetings));
             cm.MenuItems.Add("Info and Changelogs", new EventHandler(openInfo));
@@ -68,8 +65,7 @@ namespace meautosd
             nudDelay.Value = Settings.Default.delayTime;
             cbWriteLog.Checked = Settings.Default.writeLog;
 
-            timer.Start();
-            perfTimer.Start();
+            AMEWatcher.Start();
 
             try
             {
@@ -81,12 +77,6 @@ namespace meautosd
             }
 
             testForCSCore();
-
-            if (!Settings.Default.dontShowSurvey)
-            {
-                fSurvey survey = new fSurvey();
-                survey.ShowDialog();
-            }
 
             if (Settings.Default.logFileLoc == "")
                 Settings.Default.logFileLoc = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\ameautosd_logfile.txt";
@@ -114,7 +104,7 @@ namespace meautosd
             settings.ShowDialog();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void AMEWatcher_Tick(object sender, EventArgs e)
         {
             Process[] process = Process.GetProcessesByName("Adobe Media Encoder");
 
@@ -186,7 +176,7 @@ namespace meautosd
             lbStatus.Text = "Rendering Finished.";
             lbStatus.ForeColor = Color.LimeGreen;
             pbStatus.Image = Properties.Resources.status_finish;
-            timer.Stop();
+            AMEWatcher.Stop();
 
             switch (Settings.Default.afterEncoding)
             {
@@ -200,11 +190,10 @@ namespace meautosd
                 case 1:
                     btCancelTask.Enabled = true;
                     enabled_btCancelTask = true;
-                    timer1.Start();
+                    TimeDiplayUpdater.Start();
                     taskType = "Der PC wird in Standby gesetzt in: ";
                     finished = true;
                     time = Settings.Default.delayTime * 60;
-                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Standby gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     deleteFinishFile();
                     break;
 
@@ -212,11 +201,10 @@ namespace meautosd
                 case 2:
                     btCancelTask.Enabled = true;
                     enabled_btCancelTask = true;
-                    timer1.Start();
+                    TimeDiplayUpdater.Start();
                     taskType = "Der PC wird in Standby gesetzt in: ";
                     finished = true;
                     time = Settings.Default.delayTime * 60;
-                    MessageBox.Show("Der PC wird in " + Settings.Default.delayTime * 60 + " Sekunden in den Ruhezustand (Hibernate) gesetzt!", "Standby", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     deleteFinishFile();
                     break;
 
@@ -229,7 +217,6 @@ namespace meautosd
                     time = Settings.Default.delayTime * 60;
                     deleteFinishFile();
 
-                    MessageBox.Show("Rendering completed.", "Rendering completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (Settings.Default.pbSend && Settings.Default.pbToken != "")
                     {
                         cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Rendering completed.");
@@ -240,9 +227,9 @@ namespace meautosd
         }
 
         
-        private void timer1_Tick(object sender, EventArgs e)
+        private void TimeDisplayUpdater_Tick(object sender, EventArgs e)
         {
-            time = time-1;
+            time = time - 1;
             lbTask.Text = taskType + time + " Sek.";
 
             if (time == 0)
@@ -267,10 +254,10 @@ namespace meautosd
                 Process.Start("shutdown", "/a");
                 enabled_btCancelTask = false;
                 btCancelTask.Enabled = false;
-                timer1.Stop();
+                TimeDiplayUpdater.Stop();
                 lbTask.Text = "";
             }
-            timer.Start();
+            AMEWatcher.Start();
         }
 
         public void shutDown()
@@ -278,7 +265,7 @@ namespace meautosd
             Process.Start("shutdown", "/s /t " + Settings.Default.delayTime * 60);
             btCancelTask.Enabled = true;
             enabled_btCancelTask = true;
-            timer1.Start();
+            TimeDiplayUpdater.Start();
             taskType = "Der PC wird heruntergefahren in: ";
             finished = true;
             time = Settings.Default.delayTime * 60;
@@ -288,14 +275,6 @@ namespace meautosd
                 cPush.send(Settings.Default.pbToken, "AME Auto Shutdown", "Your PC will shut down now.");
             }
 
-            //if (Settings.Default.writeLog)
-            //{
-            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-            //    writer.WriteLine("SYSTEM SHUTDOWN:");
-            //    writer.WriteLine(System.DateTime.Now);
-            //    writer.Close();
-            //}
-
             if (Settings.Default.writeLog)
                 File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM SHUTDOWN" + Environment.NewLine);
         }
@@ -303,14 +282,6 @@ namespace meautosd
         public void standBy()
         {
             Application.SetSuspendState(PowerState.Suspend, true, true);
-
-            //if (Settings.Default.writeLog)
-            //{
-            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-            //    writer.WriteLine("SYSTEM STANDBY:");
-            //    writer.WriteLine(System.DateTime.Now);
-            //    writer.Close();
-            //}
 
             if (Settings.Default.writeLog)
                 File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM STANDBY" + Environment.NewLine);
@@ -327,14 +298,6 @@ namespace meautosd
         public void hibernate()
         {
             Process.Start(Environment.GetEnvironmentVariable("windir") + "//system32//rundll32.exe", "powrprof.dll, SetSuspendState");
-
-            //if (Settings.Default.writeLog)
-            //{
-            //    StreamWriter writer = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "//Documents//ameautosd_logfile.txt");
-            //    writer.WriteLine("SYSTEM HIBERNATE:");
-            //    writer.WriteLine(System.DateTime.Now);
-            //    writer.Close();
-            //}
 
             if (Settings.Default.writeLog)
                 File.AppendAllText(Settings.Default.logFileLoc, "[" + System.DateTime.Now + "] " + "SYSTEM HIBERNATE" + Environment.NewLine);
@@ -449,12 +412,6 @@ namespace meautosd
             }
         }
 
-        private void perfTimer_Tick(object sender, EventArgs e)
-        {
-            //lbCPU.Text = "CPU: " + pcCPU.NextValue().ToString("0.00") + " %";
-            //lbRAM.Text = "|    RAM: " + pcRAM.NextValue().ToString("0.00") + " %";
-        }
-
         private void loadRegSettings()
         {
             if ((string)Registry.GetValue(setKey, "AMEPath", "") != "")
@@ -483,13 +440,6 @@ namespace meautosd
 
             if ((string)Registry.GetValue(setKey, "writeLog", "") != "")
                 Settings.Default.writeLog = Convert.ToBoolean(Registry.GetValue(setKey, "writeLog", ""));
-
-            if ((string)Registry.GetValue(setKey, "dontShowSurvey", "") != "")
-                Settings.Default.dontShowSurvey = Convert.ToBoolean(Registry.GetValue(setKey, "dontShowSurvey", ""));
-
-            if ((string)Registry.GetValue(setKey, "dontShowDonate", "") != "")
-                Settings.Default.dontShowDonate = Convert.ToBoolean(Registry.GetValue(setKey, "dontShowDonate", ""));
-
         }
 
         #region Settings for Variables
@@ -522,15 +472,6 @@ namespace meautosd
             Settings.Default.closeAfterEncoding = cbClose.Checked;
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btStartTimer_Click(object sender, EventArgs e)
-        {
-        }
-
         private void btStartTimer_Click_1(object sender, EventArgs e)
         {
             
@@ -540,14 +481,14 @@ namespace meautosd
                 tTime = nudHrs.Value * 3600 + nudMin.Value * 60;
                 countDown = tTime;
                 btStartTimer.Text = "Stop timer";
-                timer3.Start();
+                TimerUpdater.Start();
             }
 
             else
             {
                 lbTask.Text = "";
                 btStartTimer.Text = "Start timer";
-                timer3.Stop();
+                TimerUpdater.Stop();
             }
                 
         }
@@ -585,7 +526,7 @@ namespace meautosd
                 Settings.Default.afterEncoding = 3;
         }
 
-        private void timer3_Tick(object sender, EventArgs e)
+        private void TimerUpdater_Tick(object sender, EventArgs e)
         {
             countDown = countDown - 1;
 
@@ -611,16 +552,6 @@ namespace meautosd
                         break;
                 }
             }
-
-            //if (countDown == 0)
-            //{
-            //    if (rbShutdown.Checked)
-            //        shutDown();
-            //    else if (rbStandby.Checked)
-            //        standBy();
-            //    else if (rbHibernate.Checked)
-            //        hibernate();
-            //}
 
         }
 

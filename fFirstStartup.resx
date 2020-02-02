@@ -118,11 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value> Thank you for downloading this tool! I hope it will help you for your work.
+    <value>Thank you for downloading this tool! I hope it will help you for your work.
 
 This tool is created by zekro. All graphics used in this software are also created by zekro. The code and the UI of this tool is also fully created by zekro (with Visual Studio Ciommunity 2015).
-
-Thanks to "coniferous1" for the useful template of the Pushbullet API implementation. Source:
 
 </value>
   </data>

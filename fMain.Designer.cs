@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.lbStatus = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.AMEWatcher = new System.Windows.Forms.Timer(this.components);
             this.btCancelTask = new System.Windows.Forms.Button();
             this.lbTask = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.TimeDiplayUpdater = new System.Windows.Forms.Timer(this.components);
             this.btStartTimer = new System.Windows.Forms.Button();
             this.lable15 = new System.Windows.Forms.Label();
             this.nudMin = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.nudHrs = new System.Windows.Forms.NumericUpDown();
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.TimerUpdater = new System.Windows.Forms.Timer(this.components);
             this.cbTask = new System.Windows.Forms.ComboBox();
             this.cbClose = new System.Windows.Forms.CheckBox();
             this.cbWriteLog = new System.Windows.Forms.CheckBox();
@@ -50,7 +50,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbStatus = new System.Windows.Forms.PictureBox();
             this.pbDonate = new System.Windows.Forms.PictureBox();
-            this.perfTimer = new System.Windows.Forms.Timer(this.components);
             this.llLogFile = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nudMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHrs)).BeginInit();
@@ -71,9 +70,9 @@
             this.lbStatus.TabIndex = 1;
             this.lbStatus.Text = "<status>";
             // 
-            // timer
+            // AMEWatcher
             // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.AMEWatcher.Tick += new System.EventHandler(this.AMEWatcher_Tick);
             // 
             // btCancelTask
             // 
@@ -97,10 +96,10 @@
             this.lbTask.Size = new System.Drawing.Size(0, 13);
             this.lbTask.TabIndex = 11;
             // 
-            // timer1
+            // TimeDiplayUpdater
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.TimeDiplayUpdater.Interval = 1000;
+            this.TimeDiplayUpdater.Tick += new System.EventHandler(this.TimeDisplayUpdater_Tick);
             // 
             // btStartTimer
             // 
@@ -150,10 +149,10 @@
             this.nudHrs.Size = new System.Drawing.Size(64, 20);
             this.nudHrs.TabIndex = 13;
             // 
-            // timer3
+            // TimerUpdater
             // 
-            this.timer3.Interval = 1000;
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.TimerUpdater.Interval = 1000;
+            this.TimerUpdater.Tick += new System.EventHandler(this.TimerUpdater_Tick);
             // 
             // cbTask
             // 
@@ -256,11 +255,6 @@
             this.pbDonate.TabStop = false;
             this.pbDonate.Click += new System.EventHandler(this.pbDonate_Click);
             // 
-            // perfTimer
-            // 
-            this.perfTimer.Interval = 1000;
-            this.perfTimer.Tick += new System.EventHandler(this.perfTimer_Tick);
-            // 
             // llLogFile
             // 
             this.llLogFile.AutoSize = true;
@@ -319,16 +313,16 @@
 
         #endregion
         private System.Windows.Forms.Label lbStatus;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer AMEWatcher;
         private System.Windows.Forms.Button btCancelTask;
         private System.Windows.Forms.Label lbTask;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer TimeDiplayUpdater;
         private System.Windows.Forms.NumericUpDown nudMin;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudHrs;
         private System.Windows.Forms.Button btStartTimer;
         private System.Windows.Forms.Label lable15;
-        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer TimerUpdater;
         private System.Windows.Forms.ComboBox cbTask;
         private System.Windows.Forms.CheckBox cbClose;
         private System.Windows.Forms.CheckBox cbWriteLog;
@@ -338,7 +332,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pbStatus;
         private System.Windows.Forms.PictureBox pbDonate;
-        private System.Windows.Forms.Timer perfTimer;
         private System.Windows.Forms.LinkLabel llLogFile;
     }
 }
