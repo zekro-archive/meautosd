@@ -109,7 +109,7 @@ namespace meautosd
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://zekrodev.jimdo.com");
+            Process.Start("http://zekro.de");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -127,14 +127,9 @@ namespace meautosd
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://docs.google.com/forms/d/e/1FAIpQLSdoHNP9ptB51WhLsEqi4qU-4QQy3tjn3Nf7LbGtlM8JopsWzQ/viewform");
-        }
-
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:zekroyt@outlook.de");
+            Process.Start("mailto:contact@zekro.de");
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
